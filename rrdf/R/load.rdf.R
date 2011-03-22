@@ -1,8 +1,8 @@
 load.rdf <- function(f, format="RDF/XML") {
     .jcall(
-        "com.hp.hpl.jena.rdf.model.ModelFactory",
-        "Lcom/hp/hpl/jena/ontology/OntModel;",
-        "createOntologyModel"
+        "com.github.egonw.rrdf.RJenaHelper",
+        "Lcom/hp/hpl/jena/rdf/model/Model;",
+        "loadRdf", f, format
     )
 
 

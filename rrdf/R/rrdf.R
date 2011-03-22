@@ -1,4 +1,4 @@
-.packageName <- "rdf"
+.packageName <- "rrdf"
 
 require(rJava, quietly=TRUE)
 
@@ -9,6 +9,7 @@ require(rJava, quietly=TRUE)
     }
 
     .jinit(classpath=c(
+        paste(lib,pkg,"cont","rrdf.jar",sep=.Platform$file.sep),
         paste(lib,pkg,"cont","arq-2.8.7.jar",sep=.Platform$file.sep),
         paste(lib,pkg,"cont","icu4j-3.4.4.jar",sep=.Platform$file.sep),
         paste(lib,pkg,"cont","iri-0.8.jar",sep=.Platform$file.sep),
