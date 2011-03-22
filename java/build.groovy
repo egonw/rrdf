@@ -6,14 +6,14 @@ ant.javac(
   includes:"**/*.java",
   fork:"true") {
     classpath {
-      fileset dir: "../rdf/inst/cont", {
+      fileset dir: "../rrdf/inst/cont", {
       include name: "*.jar"
     }
   }
 }
 
 ant.jar(
-  destfile:"rrdf.jar",
+  destfile:"../rrdf/inst/cont/rrdf.jar",
   basedir:"bin",
   includes:"**/*.class"
 )
