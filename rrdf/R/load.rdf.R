@@ -41,3 +41,31 @@ summarize.rdf <- function(model) {
     }
     print(paste("Number of triples:", count))
 }
+
+sparql.rdf <- function(model, sparql) {
+    stringMat <- .jcall(
+        "com/github/egonw/rrdf/RJenaHelper",
+        "Lcom/github/egonw/rrdf/StringMatrix;", "sparql", model, sparql
+    )
+    exception <- .jgetEx(clear = TRUE)
+    if (!is.null(exception)) {
+        stop(exception)
+    }
+    return(.stringMatrix.to.matrix(stringMat))
+}
+
+.stringMatrix.to.matrix <- function(stringMatrix) {
+    nrows <- .jcall(stringMatrix, "I", "getRowCount")
+    ncols <- .jcall(stringMatrix, "I", "getColumnCount")
+    matrix = matrix(,nrows,ncols)
+    colNames = c()
+    for (col in 1:ncols) {
+      colNames = c(colNames, .jcall(stringMatrix, "S", "getColumnName", col))
+      for (row in 1:nrows) {
+        value = .jcall(stringMatrix, "S", "get", row, col)
+        matrix[row,col] = value
+      }
+    }
+    colnames(matrix) <- colNames
+    matrix
+}
