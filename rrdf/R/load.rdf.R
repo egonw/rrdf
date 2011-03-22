@@ -2,7 +2,7 @@ load.rdf <- function(filename, format="RDF/XML") {
     model <- .jcall(
         "com/github/egonw/rrdf/RJenaHelper",
         "Lcom/hp/hpl/jena/rdf/model/Model;",
-        "loadRdf"
+        "loadRdf", filename, format
     )
     return(model)
 }
@@ -28,5 +28,16 @@ merge.rdf <- function(model1, model2) {
         model1, "Lcom/hp/hpl/jena/rdf/model/Model;", 
         "add", model2
     )
+}
 
+summarize.rdf <- function(model) {
+    count <- .jcall(
+        "com/github/egonw/rrdf/RJenaHelper",
+        "I", "tripleCount", model
+    )
+    exception <- .jgetEx(clear = TRUE)
+    if (!is.null(exception)) {
+        stop(exception)
+    }
+    print(paste("Number of triples:", count))
 }

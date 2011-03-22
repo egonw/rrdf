@@ -7,11 +7,11 @@ import com.hp.hpl.jena.ontology.*;
 
 public class RJenaHelper {
 
-  public static Model loadRdf() {
+  public static Model loadRdf(String filename, String format) throws Exception {
     Model model = ModelFactory.createOntologyModel();
-    /*File file = new File(filename);
+    File file = new File(filename);
     InputStream stream = new FileInputStream(file);
-    model.read(stream, "", format);*/
+    model.read(stream, "", format);
     return model;
   }
 
@@ -33,4 +33,7 @@ public class RJenaHelper {
     return dump.toString();
   }
 
+  public static int tripleCount(Model model) {
+    return (int)model.size();
+  }
 }
