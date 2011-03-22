@@ -1,3 +1,5 @@
+package com.github.egonw.rrdf;
+
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.ontology.*;
 
