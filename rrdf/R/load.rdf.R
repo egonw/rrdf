@@ -7,19 +7,7 @@ load.rdf <- function(filename, format="RDF/XML") {
     return(model)
 }
 
-dump.rdf <- function(model) {
-    output <- .jcall(
-        "com/github/egonw/rrdf/RJenaHelper",
-        "S", "dump", model
-    )
-    exception <- .jgetEx(clear = TRUE)
-    if (!is.null(exception)) {
-        stop(exception)
-    }
-    return(output)
-}
-
-merge.rdf <- function(model1, model2) {
+combine.rdf <- function(model1, model2) {
     if (attr(model2, "jclass") != "Lcom/hp/hpl/jena/rdf/model/Model") {
         model2 <- .jcast(model2, "com/hp/hpl/jena/rdf/model/Model")
     }
