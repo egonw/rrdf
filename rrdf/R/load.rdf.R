@@ -1,11 +1,22 @@
-load.rdf <- function(f, format="RDF/XML") {
-    .jcall(
-        "com.github.egonw.rrdf.RJenaHelper",
+load.rdf <- function(filename, format="RDF/XML") {
+    model <- .jcall(
+        "com/github/egonw/rrdf/RJenaHelper",
         "Lcom/hp/hpl/jena/rdf/model/Model;",
-        "loadRdf", f, format
+        "loadRdf"
     )
+    return(model)
+}
 
-
+dump.rdf <- function(model) {
+    output <- .jcall(
+        "com/github/egonw/rrdf/RJenaHelper",
+        "S", "dump", model
+    )
+    exception <- .jgetEx(clear = TRUE)
+    if (!is.null(exception)) {
+        stop(exception)
+    }
+    return(output)
 }
 
 merge.rdf <- function(model1, model2) {
@@ -17,4 +28,5 @@ merge.rdf <- function(model1, model2) {
         model1, "Lcom/hp/hpl/jena/rdf/model/Model;", 
         "add", model2
     )
+
 }
