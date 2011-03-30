@@ -24,7 +24,7 @@ A Java Model object containing the triples loaded from the file.
 Egon Willighagen
 }
 \examples{
-%%  model = load.rdf("someFile.xml", "RDF/XML");
+\dontrun{model = load.rdf("someFile.xml", "RDF/XML")}
 }
 \keyword{ RDF }
 \keyword{ triple }

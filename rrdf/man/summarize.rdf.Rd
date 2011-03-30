@@ -16,10 +16,14 @@ A Java Model object.
 }
 }
 \value{
-Results are returned to the concole.
+Results are returned to the console.
 }
 \author{
 Egon Willighagen
+}
+\examples{
+store = new.rdf()
+summarize.rdf(store)
 }
 \keyword{ RDF }
 \keyword{ triple }
