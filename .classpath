@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="java/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/arq-2.8.7.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/icu4j-3.4.4.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/iri-0.8.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/jena-2.6.4.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/lucene-core-2.3.1.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/rrdf.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/slf4j-log4j12-1.5.8.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/wstx-asl-3.2.9.jar"/>
+	<classpathentry kind="lib" path="rrdf/inst/cont/xercesImpl-2.7.1.jar"/>
+	<classpathentry kind="output" path="java/bin"/>
+</classpath>
