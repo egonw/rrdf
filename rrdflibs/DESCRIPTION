@@ -1,11 +1,11 @@
-Package: rrdf
+Package: rrdflibs
 Type: Package
-Title: rrdf - support for the Resource Description Framework
+Title: rrdflibs - package with Jena libraries for use with rrdf
 Version: 1.1.0
 Date: 2011-03-30
 Author: Egon Willighagen <egon.willighagen@gmail.com>
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
-Depends: R (>= 2.0.0), rJava, rrdflibs (== 1.1.0)
-Description: Work with RDF data.
+Depends: R (>= 2.0.0), rJava
+Description: Jena RDF libraries.
 License: AGPL-3
 LazyLoad: yes

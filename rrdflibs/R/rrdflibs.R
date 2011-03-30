@@ -13,10 +13,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-.packageName <- "rrdf"
+.packageName <- "rrdflibs"
 
 require(rJava, quietly=TRUE)
-require(rrdflibs, quietly=TRUE)
 
 .First.lib <- function(lib, pkg) {
     dlp<-Sys.getenv("DYLD_LIBRARY_PATH")
@@ -25,6 +24,16 @@ require(rrdflibs, quietly=TRUE)
     }
 
     .jinit(classpath=c(
-        paste(lib,pkg,"java","rrdf.jar",sep=.Platform$file.sep)
+        paste(lib,pkg,"java","arq-2.8.7.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","icu4j-3.4.4.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","iri-0.8.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","jena-2.6.4.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","log4j-1.2.13.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","lucene-core-2.3.1.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","slf4j-api-1.5.8.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","slf4j-log4j12-1.5.8.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","stax-api-1.0.1.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","wstx-asl-3.2.9.jar",sep=.Platform$file.sep),
+        paste(lib,pkg,"java","xercesImpl-2.7.1.jar",sep=.Platform$file.sep)
     ))
 }
