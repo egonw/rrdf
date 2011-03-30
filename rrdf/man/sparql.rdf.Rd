@@ -24,5 +24,13 @@ A matrix object containing the results of the query.
 \author{
 Egon Willighagen
 }
+\examples{
+store = new.rdf()
+sparql.rdf(store, paste(
+  "SELECT ?subject ?predicate ?object {",
+  "  ?subject ?predicate ?object",
+  "} LIMIT 5"
+))
+}
 \keyword{ RDF }
 \keyword{ triple }

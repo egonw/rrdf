@@ -24,10 +24,8 @@ A new Java Model object containing the triples from both models.
 Egon Willighagen
 }
 \examples{
-\dontshow{
 model1 = new.rdf()
 model2 = new.rdf()
-}
 \dontrun{model3 = combine.rdf(model1, model2)}
 }
 \keyword{ RDF }
