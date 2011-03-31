@@ -23,7 +23,7 @@ new.rdf <- function() {
 }
 
 load.rdf <- function(filename, format="RDF/XML") {
-	formats = c("RDF/XML", "Notation3", "N-TRIPLES", "N3")
+	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
 	if (!(format %in% formats))
 		stop("Formats must be one in: ", formats)
     model <- .jcall(
