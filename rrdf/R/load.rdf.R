@@ -34,6 +34,19 @@ load.rdf <- function(filename, format="RDF/XML") {
     return(model)
 }
 
+save.rdf <- function(model, filename, format="RDF/XML") {
+	formats = c("RDF/XML", "RDF/XML-ABBREV", "N3")
+	if (!(format %in% formats))
+		stop("Formats must be one in: ", formats)
+	if (format == "RDF/XML") format <- "RDF/XML-ABBREV";
+	.jcall(
+			"com/github/egonw/rrdf/RJenaHelper",
+			"V",
+			"saveRdf", model, filename, format
+	)
+	return(model)
+}
+
 combine.rdf <- function(model1, model2) {
     if (attr(model2, "jclass") != "Lcom/hp/hpl/jena/rdf/model/Model") {
         model2 <- .jcast(model2, "com/hp/hpl/jena/rdf/model/Model")

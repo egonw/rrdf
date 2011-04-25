@@ -17,7 +17,9 @@ package com.github.egonw.rrdf;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -30,6 +32,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -48,6 +51,13 @@ public class RJenaHelper {
     InputStream stream = new FileInputStream(file);
     model.read(stream, "", format);
     return model;
+  }
+
+  public static void saveRdf(Model model, String filename, String format) throws Exception {
+	  File file = new File(filename);
+	  OutputStream stream = new FileOutputStream(file);
+      model.write(stream, format);
+      stream.close();
   }
 
   public static String dump(Model model) {
@@ -151,5 +161,22 @@ public class RJenaHelper {
       }
       split[1] = uri;
       return split;
+  }
+
+  public void addObjectProperty(Model model,
+		  String subject, String property, String object)
+  throws Exception {
+	  Resource subjectRes = model.createResource(subject);
+	  Property propertyRes = model.createProperty(property);
+	  Resource objectRes = model.createResource(object);
+	  model.add(subjectRes, propertyRes, objectRes);
+  }
+
+  public void addDataProperty(Model model, String subject,
+		  String property, String value)
+  throws Exception {
+	  Resource subjectRes = model.createResource(subject);
+	  Property propertyRes = model.createProperty(property);
+	  model.add(subjectRes, propertyRes, value);
   }
 }
