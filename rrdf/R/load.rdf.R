@@ -34,7 +34,7 @@ load.rdf <- function(filename, format="RDF/XML") {
     return(model)
 }
 
-save.rdf <- function(model, filename, format="RDF/XML") {
+save.rdf <- function(store, filename, format="RDF/XML") {
 	formats = c("RDF/XML", "RDF/XML-ABBREV", "N3")
 	if (!(format %in% formats))
 		stop("Formats must be one in: ", formats)
@@ -42,9 +42,9 @@ save.rdf <- function(model, filename, format="RDF/XML") {
 	.jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
 			"V",
-			"saveRdf", model, filename, format
+			"saveRdf", store, filename, format
 	)
-	return(model)
+	return(store)
 }
 
 combine.rdf <- function(model1, model2) {
