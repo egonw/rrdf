@@ -14,8 +14,8 @@ can also be used directly.
 \tabular{ll}{
 Package: \tab rrdflibs\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2011-03-30\cr
+Version: \tab 1.1.1\cr
+Date: \tab 2011-04-25\cr
 License: \tab AGPL-3\cr
 LazyLoad: \tab yes\cr
 }
