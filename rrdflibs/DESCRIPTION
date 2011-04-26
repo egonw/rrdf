@@ -1,7 +1,7 @@
 Package: rrdflibs
 Type: Package
 Title: rrdflibs - package with Jena libraries for use with rrdf
-Version: 1.1.1
+Version: 1.1.2
 Date: 2011-04-25
 Author: Egon Willighagen <egon.willighagen@gmail.com>
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
