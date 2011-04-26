@@ -24,7 +24,5 @@ require(rrdflibs, quietly=TRUE)
         Sys.setenv("DYLD_LIBRARY_PATH"=sub("/usr/X11R6/lib","",dlp))
     }
 
-    .jinit(classpath=c(
-        paste(lib,pkg,"java","rrdf.jar",sep=.Platform$file.sep)
-    ))
+    .jpackage(pkg, jars=c("rrdf.jar"))
 }
