@@ -95,6 +95,19 @@ add.triple <- function(store,
 	store
 }
 
+add.data.triple <- function(store,
+		subject="http://example.org/Subject",
+		predicate="http://example.org/Predicate",
+		data="Value") {
+	.jcall(
+		"com/github/egonw/rrdf/RJenaHelper",
+		"V",
+		"addDataProperty", store,
+		subject, predicate, data
+	)
+	store
+}
+
 .stringMatrix.to.matrix <- function(stringMatrix) {
     nrows <- .jcall(stringMatrix, "I", "getRowCount")
     ncols <- .jcall(stringMatrix, "I", "getColumnCount")
