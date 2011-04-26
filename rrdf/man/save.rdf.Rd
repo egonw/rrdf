@@ -1,5 +1,5 @@
-\name{load.rdf}
-\alias{load.rdf}
+\name{save.rdf}
+\alias{save.rdf}
 \title{
 Save RDF content
 }
