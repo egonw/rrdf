@@ -82,6 +82,19 @@ sparql.rdf <- function(model, sparql) {
     return(.stringMatrix.to.matrix(stringMat))
 }
 
+add.triple <- function(store,
+	subject="http://example.org/Subject",
+	predicate="http://example.org/Predicate",
+	object="http://example.org/Object") {
+	.jcall(
+		"com/github/egonw/rrdf/RJenaHelper",
+		"V",
+		"addObjectProperty", store,
+		subject, predicate, object
+	)
+	store
+}
+
 .stringMatrix.to.matrix <- function(stringMatrix) {
     nrows <- .jcall(stringMatrix, "I", "getRowCount")
     ncols <- .jcall(stringMatrix, "I", "getColumnCount")

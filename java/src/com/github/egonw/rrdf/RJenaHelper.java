@@ -163,7 +163,7 @@ public class RJenaHelper {
       return split;
   }
 
-  public void addObjectProperty(Model model,
+  public static void addObjectProperty(Model model,
 		  String subject, String property, String object)
   throws Exception {
 	  Resource subjectRes = model.createResource(subject);
@@ -172,7 +172,7 @@ public class RJenaHelper {
 	  model.add(subjectRes, propertyRes, objectRes);
   }
 
-  public void addDataProperty(Model model, String subject,
+  public static void addDataProperty(Model model, String subject,
 		  String property, String value)
   throws Exception {
 	  Resource subjectRes = model.createResource(subject);
