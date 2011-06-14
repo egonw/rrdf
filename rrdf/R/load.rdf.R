@@ -161,9 +161,9 @@ construct.rdf <- function(model, sparql) {
 			# possibly a RDF data type
 			datatype = c[2]
 			if (datatype == "http://www.w3.org/2001/XMLSchema#double") {
-				result = strtoi(c[1])
+				result = as.numeric(c[1])
 			} else if (datatype == "http://www.w3.org/2001/XMLSchema#float") {
-				result = strtoi(c[1])
+				result = as.numeric(c[1])
 			}
 		}
 	}
