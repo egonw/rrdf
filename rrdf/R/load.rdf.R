@@ -151,14 +151,20 @@ construct.rdf <- function(model, sparql) {
 
 .rdf.to.native <- function(string) {
 	result = string
-    c = strsplit(string, "\\^\\^")[[1]]
-	if (length(c) == 2) {
-		# possibly a RDF data type
-		datatype = c[2]
-		if (datatype == "http://www.w3.org/2001/XMLSchema#double") {
-			result = strtoi(c[1])
-		} else if (datatype == "http://www.w3.org/2001/XMLSchema#float") {
-			result = strtoi(c[1])
+	if (is.null(string)) {
+		result = NA;
+	} else if (is.na(string)) {
+		# just return NA
+	} else {
+		c = strsplit(string, "\\^\\^")[[1]]
+		if (length(c) == 2) {
+			# possibly a RDF data type
+			datatype = c[2]
+			if (datatype == "http://www.w3.org/2001/XMLSchema#double") {
+				result = strtoi(c[1])
+			} else if (datatype == "http://www.w3.org/2001/XMLSchema#float") {
+				result = strtoi(c[1])
+			}
 		}
 	}
 	result
