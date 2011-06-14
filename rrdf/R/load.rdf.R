@@ -82,6 +82,18 @@ sparql.rdf <- function(model, sparql) {
     return(.stringMatrix.to.matrix(stringMat))
 }
 
+sparql.remote <- function(endpoint, sparql) {
+	stringMat <- .jcall(
+			"com/github/egonw/rrdf/RJenaHelper",
+			"Lcom/github/egonw/rrdf/StringMatrix;", "sparqlRemote", endpoint, sparql
+	)
+	exception <- .jgetEx(clear = TRUE)
+	if (!is.null(exception)) {
+		stop(exception)
+	}
+	return(.stringMatrix.to.matrix(stringMat))
+}
+
 add.triple <- function(store,
 	subject="http://example.org/Subject",
 	predicate="http://example.org/Predicate",

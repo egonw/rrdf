@@ -38,6 +38,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.PrefixMapping;
+import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 public class RJenaHelper {
 
@@ -87,6 +88,21 @@ public class RJenaHelper {
       Query query = QueryFactory.create(queryString);
       PrefixMapping prefixMap = query.getPrefixMapping();
       QueryExecution qexec = QueryExecutionFactory.create(query, model);
+      try {
+          ResultSet results = qexec.execSelect();
+          table = convertIntoTable(prefixMap, results);
+      } finally {
+          qexec.close();
+      }
+      return table;
+  }
+
+  public static StringMatrix sparqlRemote(String endpoint, String queryString) throws Exception {
+      StringMatrix table = null;
+      Query query = QueryFactory.create(queryString);
+      QueryEngineHTTP qexec = (QueryEngineHTTP)QueryExecutionFactory.sparqlService(endpoint, query);
+      PrefixMapping prefixMap = query.getPrefixMapping();
+
       try {
           ResultSet results = qexec.execSelect();
           table = convertIntoTable(prefixMap, results);
