@@ -120,6 +120,19 @@ add.data.triple <- function(store,
 	store
 }
 
+construct.rdf <- function(model, sparql) {
+	newModel <- .jcall(
+		"com/github/egonw/rrdf/RJenaHelper",
+		"Lcom/hp/hpl/jena/rdf/model/Model;",
+		"construct", model, sparql
+	)
+	exception <- .jgetEx(clear = TRUE)
+	if (!is.null(exception)) {
+		stop(exception)
+	}
+	return(newModel)
+}
+
 .stringMatrix.to.matrix <- function(stringMatrix) {
     nrows <- .jcall(stringMatrix, "I", "getRowCount")
     ncols <- .jcall(stringMatrix, "I", "getColumnCount")

@@ -112,6 +112,18 @@ public class RJenaHelper {
       return table;
   }
 
+  public static Model construct(Model model, String queryString) throws Exception {
+	  Model result= null;
+	  Query query= QueryFactory.create(queryString);
+	  QueryExecution qexec= QueryExecutionFactory.create(query, model);
+	  try {
+		  result= qexec.execConstruct();
+	  } finally {
+		  qexec.close();
+	  }
+	  return result;
+  }
+
   private static StringMatrix convertIntoTable(
           PrefixMapping prefixMap, ResultSet results) {
       StringMatrix table = new StringMatrix();
