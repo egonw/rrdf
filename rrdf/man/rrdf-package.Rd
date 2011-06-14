@@ -9,14 +9,8 @@ Functionality to work with RDF data.
 Methods to read and write RDF, and query RDF using SPARQL.
 }
 \details{
-\tabular{ll}{
-Package: \tab rrdf\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2011-03-22\cr
-License: \tab BSD\cr
-LazyLoad: \tab yes\cr
-}
+Package based on the Jena RDF libraries to bring RDF and SPARQL
+functionality into the R environment.
 }
 \author{
 Egon Willighagen
