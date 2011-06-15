@@ -133,6 +133,19 @@ construct.rdf <- function(model, sparql) {
 	return(newModel)
 }
 
+construct.remote <- function(endpoint, sparql) {
+	newModel <- .jcall(
+			"com/github/egonw/rrdf/RJenaHelper",
+			"Lcom/hp/hpl/jena/rdf/model/Model;",
+			"constructRemote", endpoint, sparql
+	)
+	exception <- .jgetEx(clear = TRUE)
+	if (!is.null(exception)) {
+		stop(exception)
+	}
+	return(newModel)
+}
+
 .stringMatrix.to.matrix <- function(stringMatrix) {
     nrows <- .jcall(stringMatrix, "I", "getRowCount")
     ncols <- .jcall(stringMatrix, "I", "getColumnCount")

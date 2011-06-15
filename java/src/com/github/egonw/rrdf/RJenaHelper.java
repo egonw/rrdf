@@ -124,6 +124,18 @@ public class RJenaHelper {
 	  return result;
   }
 
+  public static Model constructRemote(String endpoint, String queryString) throws Exception {
+      Model result= null;
+	  Query query= QueryFactory.create(queryString);
+      QueryEngineHTTP qexec = (QueryEngineHTTP)QueryExecutionFactory.sparqlService(endpoint, query);
+	  try {
+		  result= qexec.execConstruct();
+	  } finally {
+		  qexec.close();
+	  }
+	  return result;
+  }
+
   private static StringMatrix convertIntoTable(
           PrefixMapping prefixMap, ResultSet results) {
       StringMatrix table = new StringMatrix();
