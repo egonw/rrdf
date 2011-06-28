@@ -69,6 +69,12 @@ public class StringMatrix {
                 return this.cols;
         }
 
+        public boolean hasColumn(String col) {
+            if (colHeaders == null) return false;
+
+            return colHeaders.containsValue(col);
+        }
+
         public int getColumnNumber(String col) {
                 if (colHeaders != null) {
                         for (Integer colIndex : colHeaders.keySet()) {
