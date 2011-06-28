@@ -177,6 +177,8 @@ construct.remote <- function(endpoint, sparql) {
 				result = as.numeric(c[1])
 			} else if (datatype == "http://www.w3.org/2001/XMLSchema#float") {
 				result = as.numeric(c[1])
+			} else if (datatype == "http://www.w3.org/2001/XMLSchema#string") {
+				result = c[1]
 			}
 		}
 	}
