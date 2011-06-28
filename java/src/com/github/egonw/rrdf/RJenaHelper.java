@@ -140,16 +140,19 @@ public class RJenaHelper {
           PrefixMapping prefixMap, ResultSet results) {
       StringMatrix table = new StringMatrix();
       int rowCount = 0;
-      int colCount = 0;
       while (results.hasNext()) {
-              colCount = 0;
               rowCount++;
           QuerySolution soln = results.nextSolution();
           Iterator<String> varNames = soln.varNames();
           while (varNames.hasNext()) {
-              colCount++;
               String varName = varNames.next();
-              table.setColumnName(colCount, varName);
+              int colCount = -1;
+              if (table.hasColumn(varName)) {
+            	  colCount = table.getColumnNumber(varName);
+              } else {
+            	  colCount = table.getColumnCount() + 1;
+                  table.setColumnName(colCount, varName);
+              }
               RDFNode node = soln.get(varName);
               if (node != null) {
                   String nodeStr = node.toString();
