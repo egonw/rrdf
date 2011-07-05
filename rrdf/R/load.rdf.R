@@ -44,7 +44,6 @@ save.rdf <- function(store, filename, format="RDF/XML") {
 			"V",
 			"saveRdf", store, filename, format
 	)
-	return(store)
 }
 
 combine.rdf <- function(model1, model2) {
@@ -104,7 +103,6 @@ add.triple <- function(store,
 		"addObjectProperty", store,
 		subject, predicate, object
 	)
-	store
 }
 
 add.data.triple <- function(store,
@@ -117,7 +115,6 @@ add.data.triple <- function(store,
 		"addDataProperty", store,
 		subject, predicate, data
 	)
-	store
 }
 
 construct.rdf <- function(model, sparql) {
