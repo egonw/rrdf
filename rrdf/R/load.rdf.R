@@ -146,6 +146,22 @@ construct.remote <- function(endpoint, sparql) {
 	return(newModel)
 }
 
+add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
+    if (is.null(store)) stop("A store must be given.")
+    if (is.null(prefix)) stop("A prefix must be given.")
+    if (is.null(namespace)) stop("A namespace must be given.")
+
+	.jcall(
+		"com/github/egonw/rrdf/RJenaHelper",
+		"V",
+		"addPrefix", store, prefix, namespace
+	)
+	exception <- .jgetEx(clear = TRUE)
+	if (!is.null(exception)) {
+		stop(exception)
+	}
+}
+
 .stringMatrix.to.matrix <- function(stringMatrix) {
     nrows <- .jcall(stringMatrix, "I", "getRowCount")
     ncols <- .jcall(stringMatrix, "I", "getColumnCount")

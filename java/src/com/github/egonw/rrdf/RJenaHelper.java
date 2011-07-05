@@ -222,4 +222,9 @@ public class RJenaHelper {
 	  Property propertyRes = model.createProperty(property);
 	  model.add(subjectRes, propertyRes, value);
   }
+
+  public static void addPrefix(Model model, String prefix, String namespace) {
+	  model.setNsPrefix(prefix, namespace);
+  }
+
 }
