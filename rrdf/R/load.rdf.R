@@ -162,16 +162,20 @@ add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
 .stringMatrix.to.matrix <- function(stringMatrix) {
     nrows <- .jcall(stringMatrix, "I", "getRowCount")
     ncols <- .jcall(stringMatrix, "I", "getColumnCount")
-    matrix = matrix(,nrows,ncols)
-    colNames = c()
-    for (col in 1:ncols) {
-      colNames = c(colNames, .jcall(stringMatrix, "S", "getColumnName", col))
-      for (row in 1:nrows) {
-        value = .jcall(stringMatrix, "S", "get", row, col)
-        matrix[row,col] = .rdf.to.native(value)
+    if (ncols == 0 || nrows == 0) {
+      matrix = matrix(,0,0)
+    } else { 
+      matrix = matrix(,nrows,ncols)
+      colNames = c()
+      for (col in 1:ncols) {
+        colNames = c(colNames, .jcall(stringMatrix, "S", "getColumnName", col))
+        for (row in 1:nrows) {
+          value = .jcall(stringMatrix, "S", "get", row, col)
+          matrix[row,col] = .rdf.to.native(value)
+        }
       }
+      colnames(matrix) <- colNames
     }
-    colnames(matrix) <- colNames
     matrix
 }
 
