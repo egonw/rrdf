@@ -13,12 +13,20 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-new.rdf <- function() {
-	model <- .jcall(
+new.rdf <- function(ontology=TRUE) {
+    if (ontology) {
+		model <- .jcall(
+			"com/github/egonw/rrdf/RJenaHelper",
+			"Lcom/hp/hpl/jena/rdf/model/Model;",
+			"newOntoRdf"
+		)
+	} else {
+		model <- .jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
 			"Lcom/hp/hpl/jena/rdf/model/Model;",
 			"newRdf"
-	)
+		)
+	}
 	return(model)
 }
 

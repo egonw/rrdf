@@ -42,9 +42,13 @@ import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 public class RJenaHelper {
 
-  public static Model newRdf() throws Exception {
+  public static Model newOntoRdf() throws Exception {
     return ModelFactory.createOntologyModel();
   }
+
+  public static Model newRdf() throws Exception {
+	    return ModelFactory.createDefaultModel();
+	  }
 
   public static Model loadRdf(String filename, String format) throws Exception {
     Model model = ModelFactory.createOntologyModel();
