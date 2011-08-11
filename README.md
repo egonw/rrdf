@@ -7,6 +7,10 @@ Package to bring RDF and SPARQL functionality to R, using the Jena libraries.
     rdf/ -> R package for dealing with RDF, using Jena.
     rrdflibs/ -> Jena libraries
 
+Installable packages are available from CRAN:
+
+    http://cran.r-project.org/web/packages/rrdf/
+
 # Copyright / License
 
 Copyright (C) 2011  Egon Willighagen
