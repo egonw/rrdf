@@ -116,13 +116,24 @@ add.triple <- function(store,
 add.data.triple <- function(store,
 		subject="http://example.org/Subject",
 		predicate="http://example.org/Predicate",
-		data="Value") {
-	.jcall(
-		"com/github/egonw/rrdf/RJenaHelper",
-		"V",
-		"addDataProperty", store,
-		subject, predicate, data
-	)
+		data="Value",
+		type=NULL) {
+	if (is.null(type)) {
+		.jcall(
+			"com/github/egonw/rrdf/RJenaHelper",
+			"V",
+			"addDataProperty", store,
+			subject, predicate, data
+		)
+	} else {
+		.jcall(
+			"com/github/egonw/rrdf/RJenaHelper",
+			"V",
+			"addDataProperty", store,
+			subject, predicate, data,
+			type
+		)
+	}
 }
 
 construct.rdf <- function(model, sparql) {

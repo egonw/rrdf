@@ -10,7 +10,8 @@ Adds an add property to the model.
 add.data.triple(store,
   subject="http://example.org/Subject",
   predicate="http://example.org/Predicate",
-  data="Value")
+  data="Value",
+  type=NULL)
 }
 \arguments{
   \item{store}{
@@ -25,6 +26,10 @@ URI of the predicate.
   \item{data}{
 A data value.
 }
+  \item{type}{
+Optional parameter for the data value type. Can be "string", "float",
+"double", or any other XML Schema Data Type.
+}
 }
 \value{
 The update Java Model object containing the existing and new triple.
@@ -38,6 +43,10 @@ add.data.triple(store,
   subject="http://example.org/Subject",
   predicate="http://example.org/Predicate",
   data="Value")
+add.data.triple(store,
+  subject="http://example.org/Subject",
+  predicate="http://example.org/Predicate",
+  data="1", type="integer")
 }
 \keyword{ data }
 \keyword{ predicate }

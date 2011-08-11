@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -222,9 +223,20 @@ public class RJenaHelper {
   public static void addDataProperty(Model model, String subject,
 		  String property, String value)
   throws Exception {
+	  addDataProperty(model, subject, property, value, null);
+  }
+
+  public static void addDataProperty(Model model, String subject,
+		  String property, String value, String dataType)
+  throws Exception {
 	  Resource subjectRes = model.createResource(subject);
 	  Property propertyRes = model.createProperty(property);
-	  model.add(subjectRes, propertyRes, value);
+	  
+	  if (dataType == null) {
+		  model.add(subjectRes, propertyRes, value);
+	  } else {
+		  model.add(subjectRes, propertyRes, value, new XSDDatatype(dataType));
+	  }
   }
 
   public static void addPrefix(Model model, String prefix, String namespace) {
