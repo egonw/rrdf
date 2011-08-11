@@ -85,7 +85,7 @@ summarize.rdf <- function(model) {
     print(paste("Number of triples:", count))
 }
 
-sparql.rdf <- function(model, sparql) {
+sparql.rdf <- function(model, sparql, rowvarname=NULL) {
     stringMat <- .jcall(
         "com/github/egonw/rrdf/RJenaHelper",
         "Lcom/github/egonw/rrdf/StringMatrix;", "sparql", model, sparql
@@ -94,10 +94,10 @@ sparql.rdf <- function(model, sparql) {
     if (!is.null(exception)) {
         stop(exception)
     }
-    return(.stringMatrix.to.matrix(stringMat))
+    return(.stringMatrix.to.matrix(stringMat, rowvarname))
 }
 
-sparql.remote <- function(endpoint, sparql) {
+sparql.remote <- function(endpoint, sparql, rowvarname=NULL) {
 	stringMat <- .jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
 			"Lcom/github/egonw/rrdf/StringMatrix;", "sparqlRemote", endpoint, sparql
@@ -106,7 +106,7 @@ sparql.remote <- function(endpoint, sparql) {
 	if (!is.null(exception)) {
 		stop(exception)
 	}
-	return(.stringMatrix.to.matrix(stringMat))
+	return(.stringMatrix.to.matrix(stringMat, rowvarname))
 }
 
 add.triple <- function(store,
@@ -186,22 +186,45 @@ add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
 	}
 }
 
-.stringMatrix.to.matrix <- function(stringMatrix) {
+.stringMatrix.to.matrix <- function(stringMatrix, rowvarname=NULL) {
     nrows <- .jcall(stringMatrix, "I", "getRowCount")
     ncols <- .jcall(stringMatrix, "I", "getColumnCount")
     if (ncols == 0 || nrows == 0) {
       matrix = matrix(,0,0)
-    } else { 
+    } else {
       matrix = matrix(,nrows,ncols)
       colNames = c()
+      rowNames = c()
       for (col in 1:ncols) {
-        colNames = c(colNames, .jcall(stringMatrix, "S", "getColumnName", col))
-        for (row in 1:nrows) {
-          value = .jcall(stringMatrix, "S", "get", row, col)
-          matrix[row,col] = .rdf.to.native(value)
+        colName = .jcall(stringMatrix, "S", "getColumnName", col)
+        colNames = c(colNames, colName)
+        if (ncols == 1 || # refuse to create row names if there is only one row 
+            is.null(rowvarname) ||
+            rowvarname != colName) {
+          for (row in 1:nrows) {
+            value = .jcall(stringMatrix, "S", "get", row, col)
+            matrix[row,col] = .rdf.to.native(value)
+          }
+        } else {
+          # ok, we're gonna use this column as row names
+          for (row in 1:nrows) {
+            rowName = .jcall(stringMatrix, "S", "get", row, col)
+            rowNames = c(rowNames, rowName)
+          }
         }
       }
       colnames(matrix) <- colNames
+      if (length(rownames) > 0 ) {
+        rownames(matrix) <- rowNames
+        if (length(colNames) == 2) {
+          # ok, need to make I do not end up with a vector
+          matrix = as.matrix(matrix[,-which(colNames %in% c(rowvarname))], ncol=1)
+          # and restore the column name (there must be a better way...)
+          colnames(matrix) <- colNames[-which(colNames %in% c(rowvarname))]
+        } else {
+          matrix = matrix[,-which(colNames %in% c(rowvarname))]
+        }
+      }
     }
     matrix
 }

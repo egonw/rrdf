@@ -7,7 +7,7 @@ Run a SPARQL query on a remote SPARQL end point.
 Runs a query against a SPARQL end point.
 }
 \usage{
-sparql.remote(endpoint, sparql)
+sparql.remote(endpoint, sparql, rowvarname)
 }
 \arguments{
   \item{endpoint}{
@@ -15,6 +15,10 @@ The SPARQL end point.
 }
   \item{sparql}{
 The SPARQL query.
+}
+  \item{rowvarname}{
+Optional SPARQL variable name (without the ?) for which the values
+will be used as row names of the result matrix.
 }
 }
 \value{
