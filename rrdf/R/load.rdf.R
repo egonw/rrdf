@@ -30,16 +30,24 @@ new.rdf <- function(ontology=TRUE) {
 	return(model)
 }
 
-load.rdf <- function(filename, format="RDF/XML") {
+load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
 	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
 	if (!(format %in% formats))
 		stop("Formats must be one in: ", formats)
-    model <- .jcall(
-        "com/github/egonw/rrdf/RJenaHelper",
-        "Lcom/hp/hpl/jena/rdf/model/Model;",
-        "loadRdf", filename, format
-    )
-    return(model)
+	if (is.null(appendTo)) {
+	    model <- .jcall(
+    	    "com/github/egonw/rrdf/RJenaHelper",
+       		"Lcom/hp/hpl/jena/rdf/model/Model;",
+       		"loadRdf", filename, format
+    	)
+        return(model)
+    } else {
+	    model <- .jcall(
+    	    "com/github/egonw/rrdf/RJenaHelper",
+       		"Lcom/hp/hpl/jena/rdf/model/Model;",
+       		"loadRdf", filename, format, appendTo
+    	)
+    }
 }
 
 save.rdf <- function(store, filename, format="RDF/XML") {

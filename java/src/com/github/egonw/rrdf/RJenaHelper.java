@@ -52,11 +52,14 @@ public class RJenaHelper {
 	  }
 
   public static Model loadRdf(String filename, String format) throws Exception {
-    Model model = ModelFactory.createOntologyModel();
-    File file = new File(filename);
-    InputStream stream = new FileInputStream(file);
-    model.read(stream, "", format);
-    return model;
+    return loadRdf(filename, format, ModelFactory.createOntologyModel());
+  }
+
+  public static Model loadRdf(String filename, String format, Model appendTo) throws Exception {
+	  File file = new File(filename);
+	  InputStream stream = new FileInputStream(file);
+	  appendTo.read(stream, "", format);
+	  return appendTo;
   }
 
   public static void saveRdf(Model model, String filename, String format) throws Exception {
