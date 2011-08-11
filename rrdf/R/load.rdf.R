@@ -214,7 +214,7 @@ add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
         }
       }
       colnames(matrix) <- colNames
-      if (length(rownames) > 0 ) {
+      if (length(rowNames) > 0 ) {
         rownames(matrix) <- rowNames
         if (length(colNames) == 2) {
           # ok, need to make I do not end up with a vector
