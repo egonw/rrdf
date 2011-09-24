@@ -105,10 +105,30 @@ public class RJenaHelper {
       return table;
   }
 
-  public static StringMatrix sparqlRemote(String endpoint, String queryString) throws Exception {
+  public static StringMatrix sparqlRemote(String endpoint, String queryString)
+  throws Exception {
       StringMatrix table = null;
       Query query = QueryFactory.create(queryString);
       QueryEngineHTTP qexec = (QueryEngineHTTP)QueryExecutionFactory.sparqlService(endpoint, query);
+      PrefixMapping prefixMap = query.getPrefixMapping();
+
+      try {
+          ResultSet results = qexec.execSelect();
+          table = convertIntoTable(prefixMap, results);
+      } finally {
+          qexec.close();
+      }
+      return table;
+  }
+
+  public static StringMatrix sparqlRemote(String endpoint, String queryString, String user, String password)
+  throws Exception {
+      StringMatrix table = null;
+      Query query = QueryFactory.create(queryString);
+      QueryEngineHTTP qexec = (QueryEngineHTTP)QueryExecutionFactory.sparqlService(endpoint, query);
+      if (user != null) {
+          qexec.setBasicAuthentication("" + user, ("" + password).toCharArray());
+      }
       PrefixMapping prefixMap = query.getPrefixMapping();
 
       try {
