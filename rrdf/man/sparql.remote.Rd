@@ -39,7 +39,18 @@ sparql.remote("http://rdf.farmbio.uu.se/chembl/sparql",
     "SELECT DISTINCT ?instance",
     "WHERE { ?instance a <http://purl.org/ontology/bibo/Article> }",
     "LIMIT 5"
-  ))
+  )
+)
+
+# with authentication
+sparql.remote("http://rdf.farmbio.uu.se/chembl/sparql",
+  paste(
+    "SELECT DISTINCT ?predicate",
+    "WHERE { [] ?predicate [] }"
+  ),
+  user="user", password="password"
+)
 }
+
 \keyword{ RDF }
 \keyword{ triple }
