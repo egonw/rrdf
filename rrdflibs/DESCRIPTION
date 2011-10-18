@@ -6,8 +6,6 @@ Date: 2011-10-18
 Author: Egon Willighagen <egon.willighagen@gmail.com>
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
 Depends: R (>= 2.0.0), rJava
-Description: Jena RDF and Apache HTTP Client libraries.
-
-Jena and HTTPClient are distributed under their original licenses.
+Description: Jena RDF and Apache HTTP Client libraries. Jena and HTTPClient are distributed under their original licenses.
 License: AGPL-3
 LazyLoad: yes
