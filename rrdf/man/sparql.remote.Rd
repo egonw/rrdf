@@ -7,7 +7,7 @@ Run a SPARQL query on a remote SPARQL end point.
 Runs a query against a SPARQL end point.
 }
 \usage{
-sparql.remote(endpoint, sparql, rowvarname, user, password)
+sparql.remote(endpoint, sparql, rowvarname, user, password, jena)
 }
 \arguments{
   \item{endpoint}{
@@ -25,6 +25,10 @@ Optional user name for HTTP authentication.
 }
   \item{password}{
 Optional password for HTTP authentication.
+}
+  \item{jena}{
+Boolean to indicate if Jena should be used for the remote SPARQL querying,
+or Apache's HttpClient.
 }
 }
 \value{

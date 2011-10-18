@@ -20,9 +20,24 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.query.Query;
@@ -31,6 +46,7 @@ import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFactory;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -107,17 +123,49 @@ public class RJenaHelper {
 
   public static StringMatrix sparqlRemote(String endpoint, String queryString)
   throws Exception {
-      StringMatrix table = null;
-      Query query = QueryFactory.create(queryString);
-      QueryEngineHTTP qexec = (QueryEngineHTTP)QueryExecutionFactory.sparqlService(endpoint, query);
-      PrefixMapping prefixMap = query.getPrefixMapping();
+	  return sparqlRemote(endpoint, queryString, null, null);
+  }
 
-      try {
-          ResultSet results = qexec.execSelect();
-          table = convertIntoTable(prefixMap, results);
-      } finally {
-          qexec.close();
+  public static StringMatrix sparqlRemoteNoJena(String endpoint, String queryString)
+  throws Exception {
+	  return sparqlRemoteNoJena(endpoint, queryString, null, null);
+  }
+
+  public static StringMatrix sparqlRemoteNoJena(String endpoint, String queryString, String user, String password)
+  throws Exception {
+      StringMatrix table = null;
+
+      // use Apache for doing the SPARQL query
+      DefaultHttpClient httpclient = new DefaultHttpClient();
+
+      // Set credentials on the client
+      if (user != null) {
+    	  URL endpointURL = new URL(endpoint);
+    	  CredentialsProvider credsProvider = new BasicCredentialsProvider();
+    	  credsProvider.setCredentials(
+            new AuthScope(endpointURL.getHost(), AuthScope.ANY_PORT), 
+            new UsernamePasswordCredentials(user, password)
+          );
+    	  httpclient.setCredentialsProvider(credsProvider);
       }
+         
+      List<NameValuePair> formparams = new ArrayList<NameValuePair>();
+      formparams.add(new BasicNameValuePair("query", queryString));
+      UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+      HttpPost httppost = new HttpPost(endpoint);
+      httppost.setEntity(entity);
+      HttpResponse response = httpclient.execute(httppost);
+      HttpEntity responseEntity = response.getEntity();
+      InputStream in = responseEntity.getContent();
+
+      // now the Jena part
+      ResultSet results = ResultSetFactory.fromXML(in);
+      // also use Jena for getting the prefixes...
+      Query query = QueryFactory.create(queryString);
+      PrefixMapping prefixMap = query.getPrefixMapping();
+      table = convertIntoTable(prefixMap, results);
+
+      in.close();
       return table;
   }
 

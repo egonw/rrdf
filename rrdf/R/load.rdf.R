@@ -97,16 +97,19 @@ sparql.rdf <- function(model, sparql, rowvarname=NULL) {
     return(.stringMatrix.to.matrix(stringMat, rowvarname))
 }
 
-sparql.remote <- function(endpoint, sparql, rowvarname=NULL, user=NA, password=NA) {
+sparql.remote <- function(endpoint, sparql, rowvarname=NULL, user=NA, password=NA, jena=TRUE) {
+    method = "sparqlRemoteNoJena";
+    if (jena) method = "sparqlRemote";
+
     if (is.na(user)) {
 		stringMat <- .jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
-			"Lcom/github/egonw/rrdf/StringMatrix;", "sparqlRemote", endpoint, sparql
+			"Lcom/github/egonw/rrdf/StringMatrix;", method, endpoint, sparql
 		)
 	} else {
 		stringMat <- .jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
-			"Lcom/github/egonw/rrdf/StringMatrix;", "sparqlRemote", endpoint, sparql,
+			"Lcom/github/egonw/rrdf/StringMatrix;", method, endpoint, sparql,
 			user, password
 		)
 	}
