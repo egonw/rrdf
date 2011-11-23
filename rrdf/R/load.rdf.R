@@ -101,23 +101,34 @@ sparql.remote <- function(endpoint, sparql, rowvarname=NULL, user=NA, password=N
     method = "sparqlRemoteNoJena";
     if (jena) method = "sparqlRemote";
 
+    stringMat = NULL
     if (is.na(user)) {
-		stringMat <- .jcall(
-			"com/github/egonw/rrdf/RJenaHelper",
-			"Lcom/github/egonw/rrdf/StringMatrix;", method, endpoint, sparql
-		)
+     	tryCatch(
+	    	stringMat <- .jcall(
+			    "com/github/egonw/rrdf/RJenaHelper",
+			    "Lcom/github/egonw/rrdf/StringMatrix;", method, endpoint, sparql
+		    ),
+	        Exception = function(e) {
+	            warning(e)
+	        }
+	    )
 	} else {
-		stringMat <- .jcall(
-			"com/github/egonw/rrdf/RJenaHelper",
-			"Lcom/github/egonw/rrdf/StringMatrix;", method, endpoint, sparql,
-			user, password
-		)
+     	tryCatch(
+		    stringMat <- .jcall(
+			    "com/github/egonw/rrdf/RJenaHelper",
+    			"Lcom/github/egonw/rrdf/StringMatrix;", method, endpoint, sparql,
+		    	user, password
+		    ),
+	        Exception = function(e) {
+	            warning(e)
+	        }
+    	)
+    }
+	if (!is.null(stringMat)) {
+	    return(.stringMatrix.to.matrix(stringMat, rowvarname))
+	} else {
+		return(matrix(,0,0))
 	}
-	exception <- .jgetEx(clear = TRUE)
-	if (!is.null(exception)) {
-		stop(exception)
-	}
-	return(.stringMatrix.to.matrix(stringMat, rowvarname))
 }
 
 add.triple <- function(store,
@@ -169,16 +180,22 @@ construct.rdf <- function(model, sparql) {
 }
 
 construct.remote <- function(endpoint, sparql) {
-	newModel <- .jcall(
+    newModel = NULL
+	tryCatch(
+	    newModel <- .jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
 			"Lcom/hp/hpl/jena/rdf/model/Model;",
 			"constructRemote", endpoint, sparql
+	    ),
+	    Exception = function(e) {
+	        warning(e)
+	    }
 	)
-	exception <- .jgetEx(clear = TRUE)
-	if (!is.null(exception)) {
-		stop(exception)
+	if (!is.null(newModel)) {
+        return(newModel)
+	} else {
+		return(new.rdf())
 	}
-	return(newModel)
 }
 
 add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
