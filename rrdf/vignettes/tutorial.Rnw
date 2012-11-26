@@ -14,12 +14,12 @@ This tutorial is licensed Creative Commons BY-SA.
 
 \section{Introduction}
 
-After RDF and SPARQL integration was finished, I realized that impact would even be larger if
+After RDF and SPARQL integration into Bioclipse was finished, I realized that impact would even be larger if
 I would add support for that to R. That was in 2011. This package does just that, and allows
 to work with RDF data and perform SPARQL queries. I am indepted to Rajarshi Guha, whos rcdk
-package provided me with a template to create this package from.
+package provided me with a template to create this package from \cite{rcdk}.
 
-This tutorial will demo in two sections how RDF can be handles and how SPARQL functionality
+This tutorial will demo in two sections how RDF can be handles and how SPARQL \cite{Seaborne2009} functionality
 can be used.
 
 But before we start, we first have to load the library:
@@ -34,7 +34,8 @@ this package would have had to use an alternative.
 \section{Handling triples}
 
 To handle triples, we first need a triple store. At this moment only in-memory stores are
-supported, though the code shared with Bioclipse was later been extended with on-disk stores.
+supported, though the code shared with Bioclipse was later been extended with on-disk stores,
+and I still need to port that code to this package.
 
 The package supports two kinds of stores, one that has minimal ontology support, and one
 basically just handles triples. Both can be created with the \textit{new.rdf} command:
@@ -211,8 +212,27 @@ sparql.rdf(exData,
 ) 
 @
 
-%\bibliographystyle{abbrv}
-%\bibliography{tutorial}
+The latter has the added value that now the matrix is numeric.
+
+\subsection{Remote SPARQL}
+
+Similarly, we can do remote queries. We just replace the local store with a string representation of the SPARQL
+end point URI, and slightly change the method name:
+
+\begin{verbatim}
+sparql.remote(
+  "http://rdf.farmbio.uu.se/chembl/sparql",
+  paste(
+    "SELECT DISTINCT ?predict WHERE {",
+    " ?subject ?predict ?object ",
+    "}"
+  )
+) 
+\end{verbatim}
+
+
+\bibliographystyle{abbrv}
+\bibliography{tutorial}
 
 
 \end{document}

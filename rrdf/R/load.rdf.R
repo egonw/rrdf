@@ -237,6 +237,10 @@ add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
           # ok, we're gonna use this column as row names
           for (row in 1:nrows) {
             rowName = .jcall(stringMatrix, "S", "get", row, col)
+   	        c = strsplit(rowName, "\\^\\^")[[1]]
+		    if (length(c) == 2) {
+		      rowName = c[1]
+		    }
             rowNames = c(rowNames, rowName)
           }
         }
@@ -271,6 +275,8 @@ add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
 			if (datatype == "http://www.w3.org/2001/XMLSchema#double") {
 				result = as.numeric(c[1])
 			} else if (datatype == "http://www.w3.org/2001/XMLSchema#float") {
+				result = as.numeric(c[1])
+			} else if (datatype == "http://www.w3.org/2001/XMLSchema#integer") {
 				result = as.numeric(c[1])
 			} else if (datatype == "http://www.w3.org/2001/XMLSchema#string") {
 				result = c[1]
