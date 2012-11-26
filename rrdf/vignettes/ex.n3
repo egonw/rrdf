@@ -1,0 +1,21 @@
+@prefix rdfs:    <http://www.w3.org/rdf/schema/#> .
+@prefix ex:      <http://example.org/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Methane
+  rdfs:label "methane"^^xsd:string ;
+  ex:formula "CH4"^^xsd:string ;
+  ex:carbonCount "1"^^xsd:integer .
+ex:Ethane
+  rdfs:label "ethane"^^xsd:string ;
+  ex:formula "C2H6"^^xsd:string ;
+  ex:carbonCount "2"^^xsd:integer .
+ex:Propane
+  rdfs:label "propane"^^xsd:string ;
+  ex:formula "C3H8"^^xsd:string ;
+  ex:carbonCount "3"^^xsd:integer .
+ex:Butane
+  rdfs:label "butane"^^xsd:string ;
+  ex:formula "C4H10"^^xsd:string ;
+  ex:carbonCount "4"^^xsd:integer .
+

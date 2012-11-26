@@ -4,12 +4,13 @@
 
 \title{A short tutorial on rrdf}
 \author{
-  Egon Willighagen
+  Egon L. Willighagen
 }
-\date{\today}
+\date{Copyright (C) \today}
 
 \begin{document}
 \maketitle
+This tutorial is licensed Creative Commons BY-SA.
 
 \section{Introduction}
 
@@ -43,6 +44,23 @@ ontStore = new.rdf()
 store = new.rdf(ontology=FALSE)
 @
 
+The store is in fact a Jave object form the Jena library, so that simply printing the object
+is somewhat uninformative:
+
+<<>>=
+store
+@
+
+But, we can use the \textit{summarize.rdf} method instead:
+
+<<>>=
+summarize.rdf(ontStore)
+summarize.rdf(store)
+@
+
+Possibly, we will get a store prefilled with some 40 triples, defining core schema. When we later
+serialize the RDF into file formats, we normally no longer see these triples.
+
 With a store at hand, we can start playing with triples.
 
 \subsection{Minting triples}
@@ -56,9 +74,142 @@ add.triple(store,
   predicate="http://example.org/Predicate",
   object="http://example.org/Object"
 )
+summarize.rdf(store)
 @
 
+We can see now that we have one more triple than we had earlier. The other method is
+for adding data triples, and now the last parameter is a Literal:
 
+<<>>=
+add.data.triple(store,
+  subject="http://example.org/Subject",
+  predicate="http://example.org/Predicate",
+  data="Value"
+)
+@
+
+This method also allows you to set the type of the Literal, but at this time only using XML Schema data types using
+their local names:
+
+<<>>=
+add.data.triple(store,
+  subject="http://example.org/Subject",
+  predicate="http://example.org/Predicate",
+  data="Value",
+  type="string"
+)
+@
+
+\subsection{Serialization}
+
+A store is nice, but to interoperate with other tools, we commonly have serialize the data. For this, we can use
+the \textit{save.rdf} method (the filename is POSIX-based):
+
+<<>>=
+save.rdf(store, "/tmp/store.rdfxml")
+@
+
+This example shows that the methods takes the RDF/XML format as default. That is, the verbose RDF/XML. But you
+can also save as abbreviated RDF/XML and as Notation3:
+
+<<>>=
+save.rdf(store, "/tmp/store.ardfxml", format="RDF/XML-ABBREV")
+save.rdf(store, "/tmp/store.n3", format="N3")
+@
+
+To customize the output, we can define prefixes:
+
+<<>>=
+add.prefix(store, "ex", "http://example.org/")
+add.prefix(store, "xsd", "http://www.w3.org/2001/XMLSchema#")
+save.rdf(store, "/tmp/prefix.n3", format="N3")
+@
+
+The output will then resemble:
+
+\begin{verbatim}
+\@prefix ex:      <http://example.org/> .
+\@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Subject
+      ex:Predicate "Value" , "Value"^^xsd:string , ex:Object .
+\end{verbatim}
+
+\subsection{Loading triple files}
+\label{sec:loading}
+
+Minting triples one by one can be fun for a while, but soon you will want to just load a set of triples from
+a data file. This is done with the \textit{load.rdf} method. Let's read this file:
+
+\begin{verbatim}
+\@prefix rdfs:    <http://www.w3.org/rdf/schema/#> .
+\@prefix ex:      <http://example.org/> .
+\@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Methane
+  rdfs:label "methane"^^xsd:string ;
+  ex:formula "CH4"^^xsd:string ;
+  ex:carbonCount "1"^^xsd:integer .
+ex:Ethane
+  rdfs:label "ethane"^^xsd:string ;
+  ex:formula "C2H6"^^xsd:string ;
+  ex:carbonCount "2"^^xsd:integer .
+ex:Propane
+  rdfs:label "propane"^^xsd:string ;
+  ex:formula "C3H8"^^xsd:string ;
+  ex:carbonCount "3"^^xsd:integer .
+ex:Butane
+  rdfs:label "butane"^^xsd:string ;
+  ex:formula "C4H10"^^xsd:string ;
+  ex:carbonCount "4"^^xsd:integer .
+\end{verbatim}
+
+This file contains information about a series chemical compounds, called alkanes. For that, we use this code:
+
+<<>>=
+exData = load.rdf("ex.n3", format="N3")
+summarize.rdf(exData)
+@
+
+Note that we have the additional 40 triples from the ontology model. It therefore read 12 triples from the file.
+
+And with this ability, we are ready to do the basic stuff: create, load, and save RDF. We are ready to start
+analyzing the data contained in the RDF, which starts with extracting the data we are interested in.
+
+\section{Querying RDF stores}
+
+To query RDF stores, the SPARQL query language was developed. The rrdf package allows you to query local and
+remote stores. This tutorial will not introduce the SPARQL language itself, for which there are plenty of resources
+available on the web.
+
+We demonstrate the SPARQL functionality with the alkane data loaded in Section~\ref{sec:loading}. For example,
+when we want to find all alkanes with more then 2 carbons we can do:
+
+<<>>=
+sparql.rdf(exData,
+  paste(
+    "SELECT ?name ?carbons WHERE {",
+    " ?alkane <http://www.w3.org/rdf/schema/#label> ?name ; ",
+    " <http://example.org/carbonCount> ?carbons ",
+    "}"
+  )
+) 
+@
+
+The results will be stored in a matrix, and the variable names in the query will be used as column names.
+We can even say which column should be used as row names:
+
+<<>>=
+sparql.rdf(exData,
+  paste(
+    "SELECT ?name ?carbons WHERE {",
+    " ?alkane <http://www.w3.org/rdf/schema/#label> ?name ; ",
+    " <http://example.org/carbonCount> ?carbons ",
+    "}"
+  ),
+  rowvarname="name"
+) 
+@
 
 %\bibliographystyle{abbrv}
 %\bibliography{tutorial}
