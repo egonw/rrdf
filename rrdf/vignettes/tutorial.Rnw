@@ -1,3 +1,8 @@
+%\VignetteIndexEntry{A short tutorial on rrdf}
+%\VignetteKeyword{RDF}
+%\VignetteKeyword{triple}
+%\VignetteKeyword{SPARQL}
+%\VignetteKeyword{Semantic Web}
 \documentclass[12pt]{article}
 
 \usepackage[utf8]{inputenc}
