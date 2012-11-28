@@ -24,12 +24,12 @@ A Jena model object containing the results of the query.
 Egon Willighagen
 }
 \examples{
-store = construct.remote("http://rdf.farmbio.uu.se/chembl/sparql",
+\dontrun{store = construct.remote("http://rdf.farmbio.uu.se/chembl/sparql",
   paste(
     "CONSTRUCT { ?instance a <http://example.org/Article> } ",
     "WHERE { ?instance a <http://purl.org/ontology/bibo/Article> }",
     "LIMIT 5"
-  ))
+  ))}
 }
 \keyword{ RDF }
 \keyword{ triple }
