@@ -60,6 +60,7 @@ save.rdf <- function(store, filename, format="RDF/XML") {
 			"V",
 			"saveRdf", store, filename, format
 	)
+        filename
 }
 
 combine.rdf <- function(model1, model2) {

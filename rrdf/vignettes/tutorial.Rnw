@@ -112,15 +112,16 @@ A store is nice, but to interoperate with other tools, we commonly have serializ
 the \textit{save.rdf} method (the filename is POSIX-based):
 
 <<>>=
-save.rdf(store, "/tmp/store.rdfxml")
+tmpfile = tempfile(fileext=".rdfxml")
+save.rdf(store, tmpfile)
 @
 
 This example shows that the methods takes the RDF/XML format as default. That is, the verbose RDF/XML. But you
 can also save as abbreviated RDF/XML and as Notation3:
 
 <<>>=
-save.rdf(store, "/tmp/store.ardfxml", format="RDF/XML-ABBREV")
-save.rdf(store, "/tmp/store.n3", format="N3")
+save.rdf(store, tempfile(fileext=".ardfxml"), format="RDF/XML-ABBREV")
+save.rdf(store, tempfile(fileext=".n3"), format="N3")
 @
 
 To customize the output, we can define prefixes:
@@ -128,7 +129,7 @@ To customize the output, we can define prefixes:
 <<>>=
 add.prefix(store, "ex", "http://example.org/")
 add.prefix(store, "xsd", "http://www.w3.org/2001/XMLSchema#")
-save.rdf(store, "/tmp/prefix.n3", format="N3")
+save.rdf(store, tempfile(fileext=".n3"), format="N3")
 @
 
 The output will then resemble:
