@@ -118,7 +118,7 @@ sparql.rdf <- function(model, sparql, rowvarname=NULL) {
     return(.stringMatrix.to.matrix(stringMat, rowvarname))
 }
 
-sparql.remote <- function(endpoint, sparql, rowvarname=NULL, user=NA, password=NA, jena=TRUE) {
+sparql.remote <- function(endpoint, sparql, rowvarname=NULL, user=NA, password=NA, jena=FALSE) {
     method = "sparqlRemoteNoJena";
     if (jena) method = "sparqlRemote";
 
