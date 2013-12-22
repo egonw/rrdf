@@ -24,14 +24,12 @@ require(rJava, quietly=TRUE)
     }
 
 	jenaJars = c(
-		"arq-2.8.7.jar", "icu4j-3.4.4.jar", "iri-0.8.jar",
-		"jena-2.6.4.jar", "log4j-1.2.13.jar", "lucene-core-2.3.1.jar",
-		"slf4j-api-1.5.8.jar", "slf4j-log4j12-1.5.8.jar",
-		"wstx-asl-3.2.9.jar", "xercesImpl-2.7.1.jar",
-		"commons-codec-1.4.jar", "commons-logging-1.1.1.jar",
-        "httpclient-4.1.2.jar", "httpclient-cache-4.1.2.jar",
-        "httpcore-4.1.2.jar", "httpmime-4.1.2.jar"
-		
+		"commons-codec-1.6.jar", "httpclient-4.2.3.jar", "httpcore-4.2.2.jar",
+		"jcl-over-slf4j-1.6.4.jar", "jena-arq-2.10.1.jar", "jena-core-2.10.1.jar",
+		"jena-iri-0.9.6.jar", "jena-tdb-0.10.1.jar",
+		"log4j-1.2.16.jar", "slf4j-api-1.6.4.jar",
+		"slf4j-log4j12-1.6.4.jar", "xercesImpl-2.11.0.jar",
+		"xml-apis-1.4.01.jar"
 	)
 	.jpackage(pkg, jars=jenaJars)
 }

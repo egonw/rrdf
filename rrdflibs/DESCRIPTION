@@ -1,8 +1,8 @@
 Package: rrdflibs
 Type: Package
 Title: rrdflibs - package with Jena and Apache HTTP libraries for use with rrdf
-Version: 1.2.2
-Date: 2011-12-01
+Version: 1.3.0
+Date: 2013-12-22
 Author: Egon Willighagen <egon.willighagen@gmail.com>
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
 Depends: R (>= 2.0.0), rJava
