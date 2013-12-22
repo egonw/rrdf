@@ -50,6 +50,26 @@ load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
     }
 }
 
+fromString.rdf <- function(rdfContent, format="RDF/XML", appendTo=NULL) {
+	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
+	if (!(format %in% formats))
+		stop("Formats must be one in: ", formats)
+	if (is.null(appendTo)) {
+	    model <- .jcall(
+    	    "com/github/egonw/rrdf/RJenaHelper",
+       		"Lcom/hp/hpl/jena/rdf/model/Model;",
+       		"fromString", rdfContent, format
+    	)
+        return(model)
+    } else {
+	    model <- .jcall(
+    	    "com/github/egonw/rrdf/RJenaHelper",
+       		"Lcom/hp/hpl/jena/rdf/model/Model;",
+       		"fromString", rdfContent, format, appendTo
+    	)
+    }
+}
+
 save.rdf <- function(store, filename, format="RDF/XML") {
 	formats = c("RDF/XML", "RDF/XML-ABBREV", "N3")
 	if (!(format %in% formats))

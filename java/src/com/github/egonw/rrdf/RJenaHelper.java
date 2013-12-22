@@ -18,6 +18,7 @@ package com.github.egonw.rrdf;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -73,9 +74,19 @@ public class RJenaHelper {
 
   public static Model loadRdf(String filename, String format, Model appendTo) throws Exception {
 	  File file = new File(filename);
-	  InputStream stream = new FileInputStream(file);
+          InputStream stream = new FileInputStream(file);
 	  appendTo.read(stream, "", format);
 	  return appendTo;
+  }
+
+  public static Model fromString(String rdfContent, String format) throws Exception {
+          return fromString(rdfContent, format, ModelFactory.createOntologyModel());
+  }
+
+  public static Model fromString(String rdfContent, String format, Model appendTo) throws Exception {
+          InputStream stream = new ByteArrayInputStream(rdfContent.getBytes());
+          appendTo.read(stream, "", format);
+          return appendTo;
   }
 
   public static void saveRdf(Model model, String filename, String format) throws Exception {
