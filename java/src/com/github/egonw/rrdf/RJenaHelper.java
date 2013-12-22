@@ -53,6 +53,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.PrefixMapping;
@@ -242,7 +243,6 @@ public class RJenaHelper {
               }
               RDFNode node = soln.get(varName);
               if (node != null) {
-                  String nodeStr = node.toString();
                   if (node.isResource()) {
                       Resource resource = (Resource)node;
                       // the resource.getLocalName() is not accurate, so I
@@ -260,7 +260,11 @@ public class RJenaHelper {
                               uriLocalSplit[0] + ":" + uriLocalSplit[1]
                           );
                       }
+                  } else if (node.isLiteral()) {
+                      Literal literal = (Literal)node;
+                      table.set(rowCount, colCount, literal.getString());
                   } else {
+                      String nodeStr = node.toString();
                       if (nodeStr.endsWith("@en"))
                               nodeStr = nodeStr.substring(
                                       0, nodeStr.lastIndexOf('@')
