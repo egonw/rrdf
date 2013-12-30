@@ -7,10 +7,10 @@ Converts a RDF store to a string
 Converts a RDF store to a string in the given serialization format.
 }
 \usage{
-asString.rdf(store, format = "N3")
+asString.rdf(model, format = "N3")
 }
 \arguments{
-  \item{store}{
+  \item{model}{
 RDF store to serialize.
 }
   \item{format}{
