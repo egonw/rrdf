@@ -118,7 +118,28 @@ add.data.triple(store,
 )
 @
 
-\subsection{Serialization}
+\subsection{Serialization to and from strings}
+\label{sec:string}
+
+It can be useful to serialize the storage to a string for introspection:
+
+<<>>=
+cat(asString.rdf(store, format="N3"))
+@
+
+And, one can also populate a storage from a string:
+
+<<>>=
+store = fromString.rdf(paste(
+  "<http://example.org/Subject>",
+  "<http://example.org/Predicate>",
+  "<http://example.org/AnotherObject>",
+  "."
+), format="N-TRIPLES");
+summarize.rdf(store)
+@
+
+\subsection{Serialization to files}
 
 A store is nice, but to interoperate with other tools, we commonly have serialize the data. For this, we can use
 the \textit{save.rdf} method (the filename is POSIX-based):
@@ -147,8 +168,8 @@ save.rdf(store, tempfile(fileext=".n3"), format="N3")
 The output will then resemble:
 
 \begin{verbatim}
-\@prefix ex:      <http://example.org/> .
-\@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:      <http://example.org/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 ex:Subject
       ex:Predicate "Value" , "Value"^^xsd:string , ex:Object .
