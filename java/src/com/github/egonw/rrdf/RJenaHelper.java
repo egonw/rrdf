@@ -15,6 +15,7 @@
  */
 package com.github.egonw.rrdf;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -88,6 +89,14 @@ public class RJenaHelper {
           InputStream stream = new ByteArrayInputStream(rdfContent.getBytes());
           appendTo.read(stream, "", format);
           return appendTo;
+  }
+
+  public static String toString(Model model, String format) throws Exception {
+	  ByteArrayOutputStream output = new ByteArrayOutputStream();
+	  model.write(output, format);
+	  output.close();
+	  String result = new String(output.toByteArray());
+	  return result;
   }
 
   public static void saveRdf(Model model, String filename, String format) throws Exception {

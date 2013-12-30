@@ -1,3 +1,3 @@
 import("rJava")
 import("rrdflibs")
-export(add.data.triple, add.prefix, add.triple, combine.rdf, construct.rdf, construct.remote, load.rdf, new.rdf, save.rdf, sparql.rdf, sparql.remote, summarize.rdf, fromString.rdf)
+export(add.data.triple, add.prefix, add.triple, combine.rdf, construct.rdf, construct.remote, load.rdf, new.rdf, save.rdf, sparql.rdf, sparql.remote, summarize.rdf, fromString.rdf, asString.rdf)
