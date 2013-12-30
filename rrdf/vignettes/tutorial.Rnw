@@ -21,7 +21,7 @@ This tutorial is licensed Creative Commons BY-SA.
 
 After RDF and SPARQL integration into Bioclipse was finished, I realized that impact would even be larger if
 I would add support for that to R. That was in 2011. This package does just that, and allows
-to work with RDF data and perform SPARQL queries. I am indepted to Rajarshi Guha, whos rcdk
+to work with RDF data and perform SPARQL queries. I am indebted to Rajarshi Guha, whos rcdk
 package provided me with a template to create this package from \cite{rcdk}.
 
 This tutorial will demo in two sections how RDF can be handles and how SPARQL \cite{Seaborne2009} functionality
@@ -50,7 +50,7 @@ ontStore = new.rdf()
 store = new.rdf(ontology=FALSE)
 @
 
-The store is in fact a Jave object form the Jena library, so that simply printing the object
+The store is in fact a Java object form the Jena library, so that simply printing the object
 is somewhat uninformative:
 
 <<>>=
@@ -182,9 +182,9 @@ Minting triples one by one can be fun for a while, but soon you will want to jus
 a data file. This is done with the \textit{load.rdf} method. Let's read this file:
 
 \begin{verbatim}
-\@prefix rdfs:    <http://www.w3.org/rdf/schema/#> .
-\@prefix ex:      <http://example.org/> .
-\@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/rdf/schema/#> .
+@prefix ex:      <http://example.org/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 ex:Methane
   rdfs:label "methane"^^xsd:string ;
