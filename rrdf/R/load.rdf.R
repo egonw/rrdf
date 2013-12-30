@@ -27,7 +27,7 @@ new.rdf <- function(ontology=TRUE) {
 			"newRdf"
 		)
 	}
-	return(new("triplestore", model))
+	return(model)
 }
 
 load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
@@ -40,6 +40,7 @@ load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
        		"Lcom/hp/hpl/jena/rdf/model/Model;",
        		"loadRdf", filename, format
     	)
+        return(model)
     } else {
 	    model <- .jcall(
     	    "com/github/egonw/rrdf/RJenaHelper",
@@ -47,7 +48,6 @@ load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
        		"loadRdf", filename, format, appendTo
     	)
     }
-  return(new("triplestore", model))
 }
 
 fromString.rdf <- function(rdfContent, format="RDF/XML", appendTo=NULL) {
@@ -71,7 +71,6 @@ fromString.rdf <- function(rdfContent, format="RDF/XML", appendTo=NULL) {
 }
 
 save.rdf <- function(store, filename, format="RDF/XML") {
-  store <- as(store, "jobjRef")
 	formats = c("RDF/XML", "RDF/XML-ABBREV", "N3")
 	if (!(format %in% formats))
 		stop("Formats must be one in: ", formats)
@@ -85,9 +84,7 @@ save.rdf <- function(store, filename, format="RDF/XML") {
 }
 
 combine.rdf <- function(model1, model2) {
-   model1 <- as(model1, "jobjRef")
-   model2 <- as(model2, "jobjRef")
-   if (attr(model2, "jclass") != "Lcom/hp/hpl/jena/rdf/model/Model") {
+    if (attr(model2, "jclass") != "Lcom/hp/hpl/jena/rdf/model/Model") {
         model2 <- .jcast(model2, "com/hp/hpl/jena/rdf/model/Model")
     }
 
@@ -98,7 +95,6 @@ combine.rdf <- function(model1, model2) {
 }
 
 summarize.rdf <- function(model) {
-    model <- as(model, "jobjRef") 
     count <- .jcall(
         "com/github/egonw/rrdf/RJenaHelper",
         "I", "tripleCount", model
@@ -111,7 +107,6 @@ summarize.rdf <- function(model) {
 }
 
 sparql.rdf <- function(model, sparql, rowvarname=NULL) {
-    model <- as(model, "jobjRef") 
     stringMat <- .jcall(
         "com/github/egonw/rrdf/RJenaHelper",
         "Lcom/github/egonw/rrdf/StringMatrix;", "sparql", model, sparql
@@ -161,8 +156,6 @@ add.triple <- function(store,
 	subject="http://example.org/Subject",
 	predicate="http://example.org/Predicate",
 	object="http://example.org/Object") {
-
-   store <- as(store, "jobjRef") 
 	.jcall(
 		"com/github/egonw/rrdf/RJenaHelper",
 		"V",
@@ -176,9 +169,6 @@ add.data.triple <- function(store,
 		predicate="http://example.org/Predicate",
 		data="Value",
 		type=NULL) {
-
-  store <- as(store, "jobjRef") 
-
 	if (is.null(type)) {
 		.jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
@@ -207,7 +197,7 @@ construct.rdf <- function(model, sparql) {
 	if (!is.null(exception)) {
 		stop(exception)
 	}
-	return(new("triplestore", newModel))
+	return(newModel)
 }
 
 construct.remote <- function(endpoint, sparql) {
@@ -233,9 +223,6 @@ add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
     if (is.null(store)) stop("A store must be given.")
     if (is.null(prefix)) stop("A prefix must be given.")
     if (is.null(namespace)) stop("A namespace must be given.")
-## FIXME Why are we giving defaults if values are required?? 
-
-  store <- as(store, "jobjRef") 
 
 	.jcall(
 		"com/github/egonw/rrdf/RJenaHelper",
