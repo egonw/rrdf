@@ -83,8 +83,20 @@ add.triple(store,
 summarize.rdf(store)
 @
 
-We can see now that we have one more triple than we had earlier. The other method is
-for adding data triples, and now the last parameter is a Literal:
+We can see now that we have one more triple than we had earlier. We can also shorten this, by
+taking advantage of R magic, to:
+
+<<>>=
+add.triple(store,
+  "http://example.org/Subject",
+  "http://example.org/Predicate",
+  "http://example.org/AnotherObject"
+)
+summarize.rdf(store)
+@
+
+The second method for adding triples is for adding data triples, and now the last parameter is a
+so-called Literal:
 
 <<>>=
 add.data.triple(store,
