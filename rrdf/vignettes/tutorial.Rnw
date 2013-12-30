@@ -124,6 +124,14 @@ add.data.triple(store,
 It can be useful to serialize the storage to a string for introspection:
 
 <<>>=
+store = new.rdf(ontology=FALSE)
+add.prefix(store, "idorg", "http://identifiers.org/pubmed/")
+add.prefix(store, "bibo", "http://purl.org/ontology/bibo/")
+add.data.triple(store,
+  "http://identifiers.org/pubmed/23657106",
+  "http://purl.org/ontology/bibo/pmid",
+  "23657106"
+)
 cat(asString.rdf(store, format="N3"))
 @
 
