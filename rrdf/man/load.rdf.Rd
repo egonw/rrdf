@@ -14,7 +14,7 @@ load.rdf(filename, format = "RDF/XML", appendTo=NULL)
 Name of the file to read the triples from.
 }
   \item{format}{
-Format of the RDF file, e.g. RDF/XML.
+Format of the RDF file. Accepted formats: RDF/XML, TURTLE, N-TRIPLES, and N3.
 }
   \item{appendTo}{
 Optional Java Model object to which read statements are added.
