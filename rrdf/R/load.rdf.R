@@ -33,7 +33,7 @@ new.rdf <- function(ontology=TRUE) {
 load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
 	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
 	if (!(format %in% formats))
-		stop("Formats must be one in: ", formats)
+		stop("Formats must be one in: ", paste(formats, collapse=", "))
 	if (is.null(appendTo)) {
 	    model <- .jcall(
     	    "com/github/egonw/rrdf/RJenaHelper",
@@ -53,7 +53,7 @@ load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
 fromString.rdf <- function(rdfContent, format="RDF/XML", appendTo=NULL) {
 	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
 	if (!(format %in% formats))
-		stop("Formats must be one in: ", formats)
+		stop("Formats must be one in: ", paste(formats, collapse=", "))
 	if (is.null(appendTo)) {
 	    model <- .jcall(
     	    "com/github/egonw/rrdf/RJenaHelper",
@@ -73,7 +73,7 @@ fromString.rdf <- function(rdfContent, format="RDF/XML", appendTo=NULL) {
 asString.rdf <- function(model, format="N3") {
 	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
 	if (!(format %in% formats))
-		stop("Formats must be one in: ", formats)
+		stop("Formats must be one in: ", paste(formats, collapse=", "))
     model <- as(model, "jobjRef") 
 	output <- .jcall(
         "com/github/egonw/rrdf/RJenaHelper",
@@ -90,7 +90,7 @@ asString.rdf <- function(model, format="N3") {
 save.rdf <- function(store, filename, format="RDF/XML") {
 	formats = c("RDF/XML", "RDF/XML-ABBREV", "N3")
 	if (!(format %in% formats))
-		stop("Formats must be one in: ", formats)
+		stop("Formats must be one in: ", paste(formats, collapse=", "))
 	if (format == "RDF/XML") format <- "RDF/XML-ABBREV";
 	.jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
