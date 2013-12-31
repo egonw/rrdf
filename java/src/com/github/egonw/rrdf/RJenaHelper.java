@@ -82,7 +82,7 @@ public class RJenaHelper {
   }
 
   public static Model fromString(String rdfContent, String format) throws Exception {
-          return fromString(rdfContent, format, ModelFactory.createDefaultModel());
+          return fromString(rdfContent, format, newRdf());
   }
 
   public static Model fromString(String rdfContent, String format, Model appendTo) throws Exception {
