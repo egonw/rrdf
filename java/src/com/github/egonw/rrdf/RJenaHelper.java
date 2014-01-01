@@ -257,18 +257,24 @@ public class RJenaHelper {
                       Resource resource = (Resource)node;
                       // the resource.getLocalName() is not accurate, so I
                       // use some custom code
-                      String[] uriLocalSplit = split(prefixMap, resource);
-                      if (uriLocalSplit[0] == null) {
-                              if (resource.getURI() != null) {
-                                      table.set(rowCount, colCount, resource.getURI());
-                              } else {
-                                      // anonymous node
-                                      table.set(rowCount, colCount, "" + resource.hashCode());
-                              }
+                      if (resource.isAnon()) {
+                    	  table.set(rowCount, colCount,
+                    	     "" + resource.getId()
+                    	  );
                       } else {
-                              table.set(rowCount, colCount,
-                              uriLocalSplit[0] + ":" + uriLocalSplit[1]
-                          );
+                    	  String[] uriLocalSplit = split(prefixMap, resource);
+                    	  if (uriLocalSplit[0] == null) {
+                    		  if (resource.getURI() != null) {
+                    			  table.set(rowCount, colCount, resource.getURI());
+                    		  } else {
+                    			  // anonymous node
+                    			  table.set(rowCount, colCount, "" + resource.hashCode());
+                    		  }
+                    	  } else {
+                    		  table.set(rowCount, colCount,
+                    			  uriLocalSplit[0] + ":" + uriLocalSplit[1]
+                    		  );
+                    	  }
                       }
                   } else if (node.isLiteral()) {
                       Literal literal = (Literal)node;
