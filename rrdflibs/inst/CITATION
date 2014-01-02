@@ -1,0 +1,11 @@
+citHeader("To cite rrdf in publications please use:")
+citEntry(entry = "Unpublished",
+        author = personList(person(given="Egon",family="Willighagen", email="egon.willighagen@gmail.com")),
+        journal = "PeerJ PrePrints",
+        title = "Accessing biological data with semantic web technologies",
+        volume = 1,
+        year = 2013,
+        number = "e185v1",
+        textVersion = "Willighagen E. (2013) Accessing biological data with semantic web technologies. PeerJ PrePrints 1:e185v1 http://dx.doi.org/10.7287/peerj.preprints.185v1",
+        note = "http://dx.doi.org/10.7287/peerj.preprints.185v1"
+)

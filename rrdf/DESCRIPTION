@@ -1,7 +1,7 @@
 Package: rrdf
 Type: Package
 Title: rrdf - support for the Resource Description Framework
-Version: 2.0.1
+Version: 2.0.2
 Date: 2014-01-01
 Author: Egon Willighagen <egon.willighagen@gmail.com>
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
