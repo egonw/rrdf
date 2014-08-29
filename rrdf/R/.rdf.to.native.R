@@ -13,22 +13,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
-	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
-	if (!(format %in% formats))
-		stop("Formats must be one in: ", paste(formats, collapse=", "))
-	if (is.null(appendTo)) {
-	    model <- .jcall(
-    	    "com/github/egonw/rrdf/RJenaHelper",
-       		"Lcom/hp/hpl/jena/rdf/model/Model;",
-       		"loadRdf", filename, format
-    	)
-        return(model)
-    } else {
-	    model <- .jcall(
-    	    "com/github/egonw/rrdf/RJenaHelper",
-       		"Lcom/hp/hpl/jena/rdf/model/Model;",
-       		"loadRdf", filename, format, appendTo
-    	)
-    }
+.rdf.to.native <- function(string) {
+	result = string
+	if (is.null(string)) {
+		result = NA;
+	} else if (is.na(string)) {
+		# just return NA
+	} else {
+		c = strsplit(string, "\\^\\^")[[1]]
+		if (length(c) == 2) {
+			# possibly a RDF data type
+			datatype = c[2]
+			if (datatype == "http://www.w3.org/2001/XMLSchema#double") {
+				result = as.numeric(c[1])
+			} else if (datatype == "http://www.w3.org/2001/XMLSchema#float") {
+				result = as.numeric(c[1])
+			} else if (datatype == "http://www.w3.org/2001/XMLSchema#integer") {
+				result = as.numeric(c[1])
+			} else if (datatype == "http://www.w3.org/2001/XMLSchema#string") {
+				result = c[1]
+			}
+		}
+	}
+	result
 }

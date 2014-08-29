@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
+fromString.rdf <- function(rdfContent, format="RDF/XML", appendTo=NULL) {
 	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
 	if (!(format %in% formats))
 		stop("Formats must be one in: ", paste(formats, collapse=", "))
@@ -21,14 +21,14 @@ load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
 	    model <- .jcall(
     	    "com/github/egonw/rrdf/RJenaHelper",
        		"Lcom/hp/hpl/jena/rdf/model/Model;",
-       		"loadRdf", filename, format
+       		"fromString", rdfContent, format
     	)
         return(model)
     } else {
 	    model <- .jcall(
     	    "com/github/egonw/rrdf/RJenaHelper",
        		"Lcom/hp/hpl/jena/rdf/model/Model;",
-       		"loadRdf", filename, format, appendTo
+       		"fromString", rdfContent, format, appendTo
     	)
     }
 }

@@ -13,22 +13,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
-	formats = c("RDF/XML", "TURTLE", "N-TRIPLES", "N3")
-	if (!(format %in% formats))
-		stop("Formats must be one in: ", paste(formats, collapse=", "))
-	if (is.null(appendTo)) {
-	    model <- .jcall(
-    	    "com/github/egonw/rrdf/RJenaHelper",
-       		"Lcom/hp/hpl/jena/rdf/model/Model;",
-       		"loadRdf", filename, format
-    	)
-        return(model)
-    } else {
-	    model <- .jcall(
-    	    "com/github/egonw/rrdf/RJenaHelper",
-       		"Lcom/hp/hpl/jena/rdf/model/Model;",
-       		"loadRdf", filename, format, appendTo
-    	)
+sparql.rdf <- function(model, sparql, rowvarname=NULL) {
+    stringMat <- .jcall(
+        "com/github/egonw/rrdf/RJenaHelper",
+        "Lcom/github/egonw/rrdf/StringMatrix;", "sparql", model, sparql
+    )
+    exception <- .jgetEx(clear = TRUE)
+    if (!is.null(exception)) {
+        stop(exception)
     }
+    return(.stringMatrix.to.matrix(stringMat, rowvarname))
 }
