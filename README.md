@@ -13,10 +13,17 @@ Installable packages are available from the CRAN archive:
 
 # Copyright / License
 
-Copyright (C) 2011-2014  Egon Willighagen
+Copyright (C) 2011-2014  Egon Willighagen and contributors
 
 Licensed AGPL v3 for the package. Jena is copyright and licensed differently.
 See the LICENSE file for details, or at https://jena.apache.org/.
+
+Contributions from:
+
+Carl Boettiger
+Ryan Kohl
+
+(See: https://github.com/egonw/rrdf/graphs/contributors)
 
 # Install from R
 
