@@ -1,11 +1,14 @@
 Package: rrdflibs
 Type: Package
 Title: rrdflibs - package with Jena and Apache HTTP libraries for use with rrdf
-Version: 1.3.0
-Date: 2013-12-22
-Author: Egon Willighagen <egon.willighagen@gmail.com>
+Version: 1.3.1
+Date: 2014-08-29
+Authors@R: c(person("Egon", "Willighagen", role = c("aut", "cre"),
+  email = "egon.willighagen@gmail.com"))
+Author: Egon Willighagen (for the R package), and all authors of all packaged Apache libraries.
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
 Depends: R (>= 2.0.0), rJava
-Description: Jena RDF and Apache HTTP Client libraries. Jena and HTTPClient are distributed under their original licenses.
-License: AGPL-3
+Description: Jena 2.11 RDF and Apache HTTP Client libraries it depends on.
+  Jena and HTTPClient are distributed under their original licenses.
+License: AGPL-3 + file LICENSE
 LazyLoad: yes
