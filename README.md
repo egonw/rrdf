@@ -40,5 +40,10 @@ This is likely currently not working, as CRAN made it much harder to have Java-b
     $ R CMD build rrdflibs
     $ R CMD check rrdf
     $ R CMD build rrdf
+    $ tar xvf rrdf_2.0.3.tar.gz rrdf/inst/doc/tutorial.pdf
+    $ R CMD check rrdf
+    $ R CMD build rrdf
+
+The second round of checking is needed to ensure to vignette inst/doc check succeeds then.
 
 
