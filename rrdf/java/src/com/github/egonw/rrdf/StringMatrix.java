@@ -84,7 +84,7 @@ public class StringMatrix {
                         }
                 }
                 throw new IllegalAccessError(
-                        "No column found with this label."
+                        "No column found with the label '" + col + "'."
                 );
         }
 
