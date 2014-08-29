@@ -33,9 +33,9 @@ This is likely currently not working, as CRAN made it much harder to have Java-b
 
 # Compile from source
 
-    $ cd java
+    $ cd rrdf/java
     $ groovy build.groovy
-    $ cd ..
+    $ cd ../..
     $ R CMD check rrdflibs
     $ R CMD build rrdflibs
     $ R CMD check rrdf
