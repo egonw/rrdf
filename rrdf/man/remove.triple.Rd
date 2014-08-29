@@ -43,8 +43,8 @@ remove.triple(store,
   subject="http://example.org/Subject",
   predicate="http://example.org/Predicate",
   object="http://example.org/Object")
-}
 cat(asString.rdf(store))
+}
 \keyword{ object }
 \keyword{ predicate }
 \keyword{ triple }

@@ -15,11 +15,11 @@
  */
 package com.github.egonw.rrdf;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -49,12 +49,13 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFactory;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.SimpleSelector;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.PrefixMapping;
@@ -347,6 +348,38 @@ public class RJenaHelper {
 		  model.add(subjectRes, propertyRes, value);
 	  } else {
 		  model.add(subjectRes, propertyRes, value, new XSDDatatype(dataType));
+	  }
+  }
+
+  public static void removeDataProperty(Model model, String subject,
+		  String property, String value)
+  throws Exception {
+	  removeDataProperty(model, subject, property, value, null);
+  }
+
+  public static void removeDataProperty(Model model, String subject,
+		  String property, String value, String dataType)
+  throws Exception {
+	  final Resource subjectRes = model.createResource(subject);
+	  final Property propertyRes = model.createProperty(property);
+	  
+	  if (dataType == null) {
+		  Literal valueLit = model.createLiteral(value);
+		  model.remove(subjectRes, propertyRes, valueLit);
+	  } else {
+		  StmtIterator iter = model.listStatements(new SimpleSelector(subjectRes,propertyRes,(RDFNode)null));
+		  Statement statementToRemove = null;
+		  while (iter.hasNext() && statementToRemove == null) {
+			  Statement statement = iter.nextStatement();
+			  Literal match = statement.getLiteral();
+			  if (match.getString().equals(value) &&
+				  match.getDatatype().getURI().equals(new XSDDatatype(dataType).getURI())) {
+				  statementToRemove = statement;
+			  }
+		  }
+		  if (statementToRemove != null) {
+			  model.remove(statementToRemove);
+		  }
 	  }
   }
 
