@@ -17,21 +17,34 @@ add.data.triple <- function(store,
 		subject="http://example.org/Subject",
 		predicate="http://example.org/Predicate",
 		data="Value",
-		type=NULL) {
-	if (is.null(type)) {
-		.jcall(
-			"com/github/egonw/rrdf/RJenaHelper",
-			"V",
-			"addDataProperty", store,
-			subject, predicate, data
-		)
-	} else {
+		type=NULL, lang=NULL) {
+
+	if (!is.null(type) && !is.null(lang)) {
+	    stop("The parameters type and lang cannot be set at the same time.");
+	}
+
+	if (!is.null(type)) {
 		.jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
 			"V",
 			"addDataProperty", store,
 			subject, predicate, data,
 			type
+		)
+	} else if (!is.null(lang)) {
+		.jcall(
+			"com/github/egonw/rrdf/RJenaHelper",
+			"V",
+			"addDataPropertyLang", store,
+			subject, predicate, data,
+			lang
+		)
+	} else {
+		.jcall(
+			"com/github/egonw/rrdf/RJenaHelper",
+			"V",
+			"addDataProperty", store,
+			subject, predicate, data
 		)
 	}
 }

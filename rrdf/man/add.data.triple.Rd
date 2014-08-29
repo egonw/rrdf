@@ -4,18 +4,18 @@
 Add an data property to the model.
 }
 \description{
-Adds an add property to the model.
+Adds an add property to the model. The type and lang parameters cannot be combined together.
 }
 \usage{
 add.data.triple(store,
   subject="http://example.org/Subject",
   predicate="http://example.org/Predicate",
   data="Value",
-  type=NULL)
+  type=NULL, lang=NULL)
 }
 \arguments{
   \item{store}{
-A triple store, for example create with new.rdf().
+A triple store, for example created with new.rdf().
 }
   \item{subject}{
 URI of the subject.
@@ -28,11 +28,17 @@ A data value.
 }
   \item{type}{
 Optional parameter for the data value type. Can be "string", "float",
-"double", or any other XML Schema Data Type.
+"double", or any other XML Schema Data Type. It cannot be used at the same
+time as lang.
+}
+  \item{lang}{
+Optional parameter with the two-letter code for the language of the literal
+content, for example "en". It cannot be used at the same
+time as lang.
 }
 }
 \value{
-The update Java Model object containing the existing and new triple.
+The updated Java Model object containing the existing and new triple.
 }
 \author{
 Egon Willighagen
@@ -47,6 +53,10 @@ add.data.triple(store,
   subject="http://example.org/Subject",
   predicate="http://example.org/Predicate",
   data="1", type="integer")
+add.data.triple(store,
+  subject="http://example.org/Subject",
+  predicate="http://example.org/Predicate",
+  data="benzeen", lang="nl")
 }
 \keyword{ data }
 \keyword{ predicate }

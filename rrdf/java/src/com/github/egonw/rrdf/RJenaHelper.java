@@ -359,6 +359,16 @@ public class RJenaHelper {
 	  }
   }
 
+  public static void addDataPropertyLang(Model model, String subject,
+		  String property, String value, String lang)
+  throws Exception {
+	  Resource subjectRes = model.createResource(subject);
+	  Property propertyRes = model.createProperty(property);
+
+	  Literal valueLit = model.createLiteral(value, lang);
+	  model.add(subjectRes, propertyRes, valueLit);
+  }
+
   public static void removeDataProperty(Model model, String subject,
 		  String property, String value)
   throws Exception {
