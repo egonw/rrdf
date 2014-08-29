@@ -1,0 +1,12 @@
+Sources for the open source software component jars can be obtained
+from the following project websites:
+
+- Apache Jena: http://jena.apache.org/
+  Code repository: http://svn.apache.org/repos/asf/jena/tags/jena-2.11.0/
+  Source code: http://archive.apache.org/dist/jena/source/jena-2.11.0-source-release.zip 
+  JAR location: http://archive.apache.org/dist/jena/binaries/apache-jena-2.11.0.tar.gz
+
+See also associated copyright information in LICENSE in the root directory of the
+package and the NOTICE file in this directory.
+
+ 
