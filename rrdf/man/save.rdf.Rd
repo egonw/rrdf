@@ -17,7 +17,7 @@ A triple store, for example create with new.rdf().
 Name of the file to read the triples from.
 }
   \item{format}{
-Format of the RDF file, e.g. RDF/XML.
+Format of the RDF file, e.g. RDF/XML. Other formats are RDF/XML-ABBREV, N3, TURTLE, and N-TRIPLE.
 }
 }
 \value{

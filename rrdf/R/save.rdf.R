@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 save.rdf <- function(store, filename, format="RDF/XML") {
-	formats = c("RDF/XML", "RDF/XML-ABBREV", "N3")
+	formats = c("RDF/XML", "RDF/XML-ABBREV", "N3", "TURTLE", "N-TRIPLE")
 	if (!(format %in% formats))
 		stop("Formats must be one in: ", paste(formats, collapse=", "))
 	if (format == "RDF/XML") format <- "RDF/XML-ABBREV";
