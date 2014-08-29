@@ -30,8 +30,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
@@ -177,6 +179,12 @@ public class RJenaHelper {
       HttpPost httppost = new HttpPost(endpoint);
       httppost.setEntity(entity);
       HttpResponse response = httpclient.execute(httppost);
+      StatusLine statusLine = response.getStatusLine();
+      int statusCode = statusLine.getStatusCode();
+	  if (statusCode != 200) throw new HttpException(
+		"Expected HTTP 200, but got a " + statusCode + ": " + statusLine.getReasonPhrase()
+	  );
+
       HttpEntity responseEntity = response.getEntity();
       InputStream in = responseEntity.getContent();
 
