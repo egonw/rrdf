@@ -322,6 +322,15 @@ public class RJenaHelper {
 	  model.add(subjectRes, propertyRes, objectRes);
   }
 
+  public static void removeObjectProperty(Model model,
+		  String subject, String property, String object)
+  throws Exception {
+	  Resource subjectRes = model.createResource(subject);
+	  Property propertyRes = model.createProperty(property);
+	  Resource objectRes = model.createResource(object);
+	  model.remove(subjectRes, propertyRes, objectRes);
+  }
+
   public static void addDataProperty(Model model, String subject,
 		  String property, String value)
   throws Exception {
