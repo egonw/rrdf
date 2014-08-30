@@ -57,10 +57,10 @@ This is likely currently not working, as CRAN made it much harder to have Java-b
     $ groovy build.groovy
     $ cd ../..
     $ R CMD build rrdflibs
-    $ R CMD check rrdflibs_1.3.2.tar.gz
+    $ R CMD check --as-cran rrdflibs_1.3.2.tar.gz
     $ R CMD build rrdf
     $ tar xvf rrdf_2.0.4.tar.gz rrdf/inst/doc/tutorial.pdf
-    $ R CMD check rrdf_2.0.4.tar.gz
+    $ R CMD check --as-cran rrdf_2.0.4.tar.gz
 
 The second round of checking is needed to ensure to vignette inst/doc check succeeds then.
 
