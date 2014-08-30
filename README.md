@@ -11,6 +11,10 @@ Installable packages are available from the CRAN archive:
 
     http://cran.r-project.org/src/contrib/Archive/rrdf/
 
+# User mailing list
+
+    https://groups.google.com/forum/#!forum/rrdf-user
+
 # Copyright / License
 
 ## rrdflibs package
