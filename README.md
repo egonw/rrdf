@@ -13,14 +13,30 @@ Installable packages are available from the CRAN archive:
 
 # Copyright / License
 
+## rrdflibs package
+
 Copyright (C) 2011-2014  Egon Willighagen and contributors
 
-Licensed AGPL v3 for the package. Jena is copyright and licensed differently.
-See the LICENSE file for details, or at https://jena.apache.org/.
+Apache License 2.0 for for the rrdflibs package files.
+
+Copyright for Jena is described in the LICENSE and java/NOTICE
+files. Please also visit https://jena.apache.org/.
+
+## rrdf package
+
+Copyright (C) 2011-2014  Egon Willighagen and contributors
+
+License AGPL v3 for the rrdf package.
+
+## Authors / Contributors
+
+Authors:
+
+Egon Willighagen
 
 Contributions from:
 
-Carl Boettiger
+Carl Boettiger,
 Ryan Kohl
 
 (See: https://github.com/egonw/rrdf/graphs/contributors)
