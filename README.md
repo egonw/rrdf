@@ -47,7 +47,7 @@ Previously, the packages were available from CRAN, but this is no longer the cas
 
 Mind you, the below install_github() method will attempt to rebuild the vignette
 and therefore at this moment require a LaTeX distribution with pdflatex and a few
-packages installed. See also bug #28 and #29.
+packages installed. See also issue #28 and #29.
 
 If you have the devtools package installed, you can do:
 
