@@ -1,3 +1,8 @@
+remove.packages(
+  c(
+    "rJava"
+  )
+)
 install.packages(
   c(
     "rJava"
