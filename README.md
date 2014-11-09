@@ -56,7 +56,7 @@ If you have the devtools package installed, you can do:
     > install.packages("devtools") # if not present already
     > library(devtools)
     > install_github("rrdf", "egonw", subdir="rrdflibs")
-    > install_github("rrdf", "egonw", subdir="rrdf")
+    > install_github("rrdf", "egonw", subdir="rrdf", build_vignettes = FALSE)
 
 # Compile from source
 
