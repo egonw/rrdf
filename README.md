@@ -64,7 +64,7 @@ If you have the devtools package installed, you can do:
     $ groovy build.groovy
     $ cd ../..
     $ R CMD build rrdflibs
-    $ R CMD check --as-cran rrdflibs_1.3.2.tar.gz
+    $ R CMD check --as-cran rrdflibs_1.4.0.tar.gz
     $ R CMD build rrdf
     $ tar xvf rrdf_2.0.4.tar.gz rrdf/inst/doc/tutorial.pdf
     $ R CMD check --as-cran rrdf_2.0.4.tar.gz
