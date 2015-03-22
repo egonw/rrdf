@@ -7,6 +7,9 @@ Authors@R: c(person("Egon", "Willighagen", role = c("aut", "cre"),
   email = "egon.willighagen@gmail.com"),
   person("Carl", "Boettiger", role = "ctb"),
   person("Ryan", "Kohl", role = "ctb"))
+Author: Egon Willighagen [aut, cre],
+  Carl Boettiger [ctb],
+  Ryan Kohl [ctb]
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
 Depends: R (>= 2.0.0), rJava, rrdflibs (>= 1.4.0)
 Description: Work with RDF data using the Jena (http://jena.apache.org) libraries.
