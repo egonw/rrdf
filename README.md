@@ -9,8 +9,10 @@ Package to bring RDF and SPARQL functionality to R, using the Jena libraries.
 
 Information about this package can be found in this preprint:
 
-    Willighagen E. (2014) Accessing biological data in R with semantic web technologies.
-    PeerJ PrePrints 2:e185v3 https://dx.doi.org/10.7287/peerj.preprints.185v3
+    Willighagen E. (2014) Accessing biological data in R with semantic web
+    technologies. PeerJ PrePrints 2:e185v3
+
+See https://dx.doi.org/10.7287/peerj.preprints.185v3
 
 (Please cite this paper if you use this package.)
 
