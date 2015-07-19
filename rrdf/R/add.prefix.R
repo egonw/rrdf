@@ -14,9 +14,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 add.prefix <- function(store=NULL, prefix=NULL, namespace=NULL) {
-    if (is.null(store)) stop("A store must be given.")
-    if (is.null(prefix)) stop("A prefix must be given.")
-    if (is.null(namespace)) stop("A namespace must be given.")
+    if (missing(store)) stop("A store must be given.")
+    if (missing(prefix)) stop("A prefix must be given.")
+    if (missing(namespace)) stop("A namespace must be given.")
 
 	.jcall(
 		"com/github/egonw/rrdf/RJenaHelper",

@@ -19,11 +19,11 @@ add.data.triple <- function(store,
 		data="Value",
 		type=NULL, lang=NULL) {
 
-	if (!is.null(type) && !is.null(lang)) {
+	if (!missing(type) && !missing(lang)) {
 	    stop("The parameters type and lang cannot be set at the same time.");
 	}
 
-	if (!is.null(type)) {
+	if (!missing(type)) {
 		types = c("boolean", "base64Binary", "hexBinary", "anyURI", "language",
 			"normalizedString", "string", "token", "byte", "decimal", "float",
 			"int", "integer", "long", "negativeInteger", "nonNegativeInteger",
@@ -40,7 +40,7 @@ add.data.triple <- function(store,
 			subject, predicate, data,
 			type
 		)
-	} else if (!is.null(lang)) {
+	} else if (!missing(lang)) {
 		.jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
 			"V",
