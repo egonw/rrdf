@@ -24,6 +24,15 @@ add.data.triple <- function(store,
 	}
 
 	if (!is.null(type)) {
+		types = c("boolean", "base64Binary", "hexBinary", "anyURI", "language",
+			"normalizedString", "string", "token", "byte", "decimal", "float",
+			"int", "integer", "long", "negativeInteger", "nonNegativeInteger",
+			"nonPositiveInteger", "positiveInteger", "short", "unsignedByte",
+			"unsignedInt", "unsignedLong", "unsignedShort", "date", "dataTyime",
+			"duration", "gDay", "gMonth", "gMonthDay", "gYear", "gYearMonth",
+			"time")
+		if (!(type %in% types))
+			stop("The data type must be one in: ", paste(types, collapse=", "))
 		.jcall(
 			"com/github/egonw/rrdf/RJenaHelper",
 			"V",

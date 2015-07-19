@@ -40,6 +40,49 @@ test_that("a triple can be added", {
   expect_equal(1, tripleCount(store))
 })
 
+test_that("a triple can be added with an English value", {
+  store = new.rdf(ontology=FALSE)
+  expect_equal(0, tripleCount(store))
+  add.data.triple(store,
+    subject="http://example.org/Subject",
+    predicate="http://example.org/Predicate",
+    data="someName",
+    lang="en")
+  expect_equal(1, tripleCount(store))
+  n3 = asString.rdf(store, format="N3")
+  expect_true(0 < nchar(n3))
+  expect_equal(1, grep("@en", n3))
+})
+
+test_that("a triple can be added with as a xsd:string", {
+  store = new.rdf(ontology=FALSE)
+  expect_equal(0, tripleCount(store))
+  add.prefix(store, "xsd", "http://www.w3.org/2001/XMLSchema#")
+  add.data.triple(store,
+    subject="http://example.org/Subject",
+    predicate="http://example.org/Predicate",
+    data="someName",
+    type="string")
+  expect_equal(1, tripleCount(store))
+  n3 = asString.rdf(store, format="N3")
+  expect_true(0 < nchar(n3))
+  expect_equal(1, grep("xsd:string", n3))
+})
+
+test_that("a full URI as data type throws an error", {
+  store = new.rdf(ontology=FALSE)
+  expect_equal(0, tripleCount(store))
+  expect_error(
+    add.data.triple(store,
+      subject="http://example.org/Subject",
+      predicate="http://example.org/Predicate",
+      data="someName",
+      type="http://www.w3.org/2001/XMLSchema#string"
+    ),
+    "The data type must be one in:*"
+  )
+})
+
 test_that("a store can be summarized", {
   store = new.rdf(ontology=FALSE)
   expect_equal("Number of triples: 0", summarize.rdf(store))
