@@ -7,6 +7,13 @@ Package to bring RDF and SPARQL functionality to R, using the Jena libraries.
     rdf/ -> R package for dealing with RDF, using Jena.
     rrdflibs/ -> Jena libraries
 
+Information about this package can be found in this preprint:
+
+    Willighagen E. (2014) Accessing biological data in R with semantic web technologies.
+    PeerJ PrePrints 2:e185v3 https://dx.doi.org/10.7287/peerj.preprints.185v3
+
+(Please cite this paper if you use this package.)
+
 # User mailing list
 
     https://groups.google.com/forum/#!forum/rrdf-user
@@ -15,7 +22,7 @@ Package to bring RDF and SPARQL functionality to R, using the Jena libraries.
 
 ## rrdflibs package
 
-Copyright (C) 2011-2014  Egon Willighagen and contributors
+Copyright (C) 2011-2015  Egon Willighagen and contributors
 
 Apache License 2.0 for for the rrdflibs package files.
 
@@ -24,7 +31,7 @@ files. Please also visit https://jena.apache.org/.
 
 ## rrdf package
 
-Copyright (C) 2011-2014  Egon Willighagen and contributors
+Copyright (C) 2011-2015  Egon Willighagen and contributors
 
 License AGPL v3 for the rrdf package.
 
