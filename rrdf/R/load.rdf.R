@@ -23,12 +23,16 @@ load.rdf <- function(filename, format="RDF/XML", appendTo=NULL) {
        		"Lcom/hp/hpl/jena/rdf/model/Model;",
        		"loadRdf", filename, format
     	)
-        return(model)
     } else {
 	    model <- .jcall(
     	    "com/github/egonw/rrdf/RJenaHelper",
        		"Lcom/hp/hpl/jena/rdf/model/Model;",
        		"loadRdf", filename, format, appendTo
     	)
+	exception <- .jgetEx(clear = TRUE)
+	if (!is.null(exception)) {
+		stop(exception)
+	}
+        return(model)
     }
 }
