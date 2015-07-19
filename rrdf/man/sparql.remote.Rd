@@ -5,6 +5,11 @@ Run a SPARQL query on a remote SPARQL end point.
 }
 \description{
 Runs a query against a SPARQL end point.
+
+If Jena is used to run the query, it will first parse the SPARQL query. If you use
+the bif:contains extension support by, for example, Virtuoso, make sure to its full
+reference <bif:contains> as explained in
+http://chem-bla-ics.blogspot.nl/2009/10/sparql-end-points-jena-and-bifcontains.html .
 }
 \usage{
 sparql.remote(endpoint, sparql, rowvarname, user, password, jena)
