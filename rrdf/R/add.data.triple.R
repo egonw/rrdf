@@ -47,4 +47,8 @@ add.data.triple <- function(store,
 			subject, predicate, data
 		)
 	}
+	exception <- .jgetEx(clear = TRUE)
+	if (!is.null(exception)) {
+		stop(exception)
+	}
 }
