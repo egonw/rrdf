@@ -14,7 +14,7 @@ asString.rdf(model, format = "N3")
 RDF store to serialize.
 }
   \item{format}{
-Format of the RDF serialization, e.g. N3 or RDF/XML.
+Format of the RDF serialization: TURTLE, N-TRIPLES, N3, or RDF/XML.
 }
 }
 \value{
