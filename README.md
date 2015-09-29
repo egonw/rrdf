@@ -59,8 +59,6 @@ and therefore at this moment require a LaTeX distribution with pdflatex and a fe
 packages installed. See also issue https://github.com/egonw/rrdf/issues/28 and
 https://github.com/egonw/rrdf/issues/29.
 
-If you have the devtools package installed, you can do:
-
     > install.packages("rJava") # if not present already
     > install.packages("devtools") # if not present already
     > library(devtools)
@@ -77,3 +75,22 @@ If you have the devtools package installed, you can do:
     $ R CMD build rrdf
     $ tar xvf rrdf_2.0.4.tar.gz rrdf/inst/doc/tutorial.pdf
     $ R CMD check --as-cran rrdf_2.0.4.tar.gz
+
+# Error Handling
+
+In case of issues on Mac, follow the instructions below:
+
+- check that the $JAVA_PATH variable is correctly set. If not:
+ 1. Run `touch ~/.bash_profile; open ~/.bash_profile` in a Terminal window.
+ 2. add the following lines to your .bash_profile and then save:
+    export JAVA_HOME=$(/usr/libexec/java_home)
+    export LD_LIBRARY_PATH=/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/server 
+    export PATH=$PATH:$JAVA_HOME/bin
+ 3. Run `source ~/.bash_profile` in a terminal window.
+
+- check that that Java >=1.7 is installed in your system. If not, go to [https://java.com/it/download/](https://java.com/it/download/)
+- check that R sees the latest Java version (`.jinit();.jcall("java/lang/System", "S", "getProperty", "java.runtime.version")`). If not [1,2]:
+ 1. Download and install Apple’s Java version 1.6 like you were asked to.
+ 2. Reconfigure your R installation by typing `sudo R CMD javareconf` in a Terminal window.
+ 3. Trigger a recompile by reinstalling rJava by typing `install.packages('rJava', type='source')`.
+ 4. Run `sudo ln -f -s $(/usr/libexec/java_home)/jre/lib/server/libjvm.dylib /usr/lib` in a Terminal window.
