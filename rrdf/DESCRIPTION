@@ -6,8 +6,8 @@ Date: 2015-07-19
 Authors@R: c(person("Egon", "Willighagen", role = c("aut", "cre"),
   email = "egon.willighagen@gmail.com"),
   person("Carl", "Boettiger", role = "ctb"),
-  person("Ryan", "Kohl", role = "ctb")),
-  person("Richard", "Zijdeman", role = "ctb")),
+  person("Ryan", "Kohl", role = "ctb"),
+  person("Richard", "Zijdeman", role = "ctb"),
   person("Davide", "Ceolin", role = "ctb"))
 Author: Egon Willighagen [aut, cre],
   Carl Boettiger [ctb],
