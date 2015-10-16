@@ -6,10 +6,14 @@ Date: 2015-07-19
 Authors@R: c(person("Egon", "Willighagen", role = c("aut", "cre"),
   email = "egon.willighagen@gmail.com"),
   person("Carl", "Boettiger", role = "ctb"),
-  person("Ryan", "Kohl", role = "ctb"))
+  person("Ryan", "Kohl", role = "ctb")),
+  person("Richard", "Zijdeman", role = "ctb")),
+  person("Davide", "Ceolin", role = "ctb"))
 Author: Egon Willighagen [aut, cre],
   Carl Boettiger [ctb],
-  Ryan Kohl [ctb]
+  Ryan Kohl [ctb],
+  Richard Zijdeman [ctb],
+  Davide Ceolin [ctb]
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
 Depends: R (>= 2.0.0), rJava, rrdflibs (>= 1.4.0)
 Suggests: testthat
