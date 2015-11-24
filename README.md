@@ -1,7 +1,7 @@
 
 # About
 
-Package to bring RDF and SPARQL functionality to R, using the Jena libraries.
+Package to bring RDF and SPARQL functionality to R, using the Jena libraries (needs Java7 or higher).
 
     java/ -> Helper classes for the R rdf package.
     rdf/ -> R package for dealing with RDF, using Jena.
