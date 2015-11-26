@@ -1,4 +1,4 @@
-# Copyright (C) 2011  Egon Willighagen <egon.willighagen@gmail.com>
+# Copyright (C) 2011-2015  Egon Willighagen <egon.willighagen@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -28,7 +28,7 @@ add.data.triple <- function(store,
 			"normalizedString", "string", "token", "byte", "decimal", "float",
 			"int", "integer", "long", "negativeInteger", "nonNegativeInteger",
 			"nonPositiveInteger", "positiveInteger", "short", "unsignedByte",
-			"unsignedInt", "unsignedLong", "unsignedShort", "date", "dataTyime",
+			"unsignedInt", "unsignedLong", "unsignedShort", "date", "dateTime",
 			"duration", "gDay", "gMonth", "gMonthDay", "gYear", "gYearMonth",
 			"time")
 		if (!(type %in% types))
