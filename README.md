@@ -18,8 +18,8 @@ See https://dx.doi.org/10.7287/peerj.preprints.185v3
 
 To cite a specific release, you can use these http://zenodo.org/ DOIs:
 
-* 2.1.2 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.34307.svg)](http://dx.doi.org/10.5281/zenodo.34307)
-* 2.1.1 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.20717.svg)](http://dx.doi.org/10.5281/zenodo.20717)
+* rrdf 2.1.2 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.34307.svg)](http://dx.doi.org/10.5281/zenodo.34307)
+* rrdf 2.1.1 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.20717.svg)](http://dx.doi.org/10.5281/zenodo.20717)
 
 # User mailing list
 
