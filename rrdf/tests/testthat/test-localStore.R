@@ -69,6 +69,21 @@ test_that("a triple can be added with as a xsd:string", {
   expect_equal(1, grep("xsd:string", n3))
 })
 
+test_that("a triple can be added with as a xsd:string", {
+  store = new.rdf(ontology=FALSE)
+  expect_equal(0, tripleCount(store))
+  add.prefix(store, "xsd", "http://www.w3.org/2001/XMLSchema#")
+  add.data.triple(store,
+    subject="http://example.org/Subject",
+    predicate="http://example.org/Predicate",
+    data="2.0",
+    type="double")
+  expect_equal(1, tripleCount(store))
+  n3 = asString.rdf(store, format="N3")
+  expect_true(0 < nchar(n3))
+  expect_equal(1, grep("xsd:double", n3))
+})
+
 test_that("a full URI as data type throws an error", {
   store = new.rdf(ontology=FALSE)
   expect_equal(0, tripleCount(store))

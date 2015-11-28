@@ -30,7 +30,7 @@ add.data.triple <- function(store,
 			"nonPositiveInteger", "positiveInteger", "short", "unsignedByte",
 			"unsignedInt", "unsignedLong", "unsignedShort", "date", "dateTime",
 			"duration", "gDay", "gMonth", "gMonthDay", "gYear", "gYearMonth",
-			"time")
+			"time", "double", "QName", "NOTATION")
 		if (!(type %in% types))
 			stop("The data type must be one in: ", paste(types, collapse=", "))
 		.jcall(
