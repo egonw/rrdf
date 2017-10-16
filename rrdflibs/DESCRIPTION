@@ -1,11 +1,11 @@
 Package: rrdflibs
 Type: Package
 Title: rrdflibs - package with Jena and Apache HTTP libraries for use with rrdf
-Version: 1.4.0
-Date: 2015-02-18
+Version: 1.4.1
+Date: 2017-10-17
 Authors@R: c(
     person("Egon", "Willighagen", role = c("aut", "cre"),
-      email = "egon.willighagen@gmail.com"),
+      email = "egon.willighagen@gmail.com", comment = c(ORCID = "0000-0001-7542-0286")),
     person("The Apache Software Foundation",
       role = c("ctb", "cph"),
       comment = "Apache Jena")
