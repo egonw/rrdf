@@ -1,129 +1,136 @@
-%\VignetteIndexEntry{A short tutorial on rrdf}
-%\VignetteKeyword{RDF}
-%\VignetteKeyword{triple}
-%\VignetteKeyword{SPARQL}
-%\VignetteKeyword{Semantic Web}
-\documentclass[12pt]{article}
+---
+title: "A short tutorial on rrdf"
+author: "Egon Willighagen"
+date: "`r Sys.Date()`"
+package: rrdf
+output: 
+  BiocStyle::html_document:
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{A short tutorial on rrdf}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}  
+  %\VignetteKeywords{triple, SPARQL, Semantic Web}
+bibliography: tutorial.bib
+csl: biomed-central.csl
+references:
+- id: dummy
+  title: no title
+  author:
+  - family: noname
+    given: noname
+---
 
-\usepackage[utf8]{inputenc}
+```{r  init, message = FALSE, echo = FALSE, results = "hide" }
+library(BiocStyle)
+```
 
-\title{A short tutorial on rrdf}
-\author{
-  Egon L. Willighagen
-}
-\date{Copyright (C) \today}
-
-\begin{document}
-\maketitle
-This tutorial is licensed Creative Commons BY-SA.
-
-\section{Introduction}
+# Introduction
 
 After RDF and SPARQL integration into Bioclipse was finished, I realized that impact would even be larger if
-I would add support for that to R~\cite{Willighagen2011}. That was in 2011. This package does just that, and allows
+I would add support for that to R [@Willighagen2011]. That was in 2011. This package does just that, and allows
 to work with RDF data and perform SPARQL queries. I am indebted to Rajarshi Guha, whos rcdk
-package provided me with a template to create this package from \cite{Guha2007}.
+package provided me with a template to create this package from [@Guha2007].
 
-This tutorial will demo in two sections how RDF can be handles and how SPARQL \cite{Seaborne2009} functionality
+This tutorial will demo in two sections how RDF can be handles and how SPARQL [@Seaborne2009] functionality
 can be used.
 
 But before we start, we first have to load the library:
 
-<<>>=
+```{r}
 library(rrdf)
-@
+```
 
 BTW, this package makes extensive use of Jena, and without this great Open Source project
 this package would have had to use an alternative.
 
-\section{Handling triples}
+# Handling triples
 
 To handle triples, we first need a triple store. At this moment only in-memory stores are
 supported, though the code shared with Bioclipse was later been extended with on-disk stores,
 and I still need to port that code to this package.
 
 The package supports two kinds of stores, one that has minimal ontology support, and one
-basically just handles triples. Both can be created with the \textit{new.rdf} command:
+basically just handles triples. Both can be created with the *new.rdf* command:
 
-<<>>=
+```{r}
 ontStore = new.rdf()
 store = new.rdf(ontology=FALSE)
-@
+```
 
 The store is in fact a Java object form the Jena library, so that simply printing the object
 is somewhat uninformative:
 
-<<>>=
+```{r}
 store
-@
+```
 
 But, we can use the \textit{summarize.rdf} method instead:
 
-<<>>=
+```{r}
 summarize.rdf(ontStore)
 summarize.rdf(store)
-@
+```
 
 Possibly, we will get a store prefilled with some 40 triples, defining core schema. When we later
 serialize the RDF into file formats, we normally no longer see these triples.
 
 With a store at hand, we can start playing with triples.
 
-\subsection{Minting triples}
+## Minting triples
 
 This package has two methods for adding triples. One has a resource-typed object, the other
 is for triples with Literal values. Adding a triple with a resource use this method:
 
-<<>>=
+```{r}
 add.triple(store,
   subject="http://example.org/Subject",
   predicate="http://example.org/Predicate",
   object="http://example.org/Object"
 )
 summarize.rdf(store)
-@
+```
 
 We can see now that we have one more triple than we had earlier. We can also shorten this, by
 taking advantage of R magic, to:
 
-<<>>=
+```{r}
 add.triple(store,
   "http://example.org/Subject",
   "http://example.org/Predicate",
   "http://example.org/AnotherObject"
 )
 summarize.rdf(store)
-@
+```
 
 The second method for adding triples is for adding data triples, and now the last parameter is a
 so-called Literal:
 
-<<>>=
+```{r}
 add.data.triple(store,
   subject="http://example.org/Subject",
   predicate="http://example.org/Predicate",
   data="Value"
 )
-@
+```
 
 This method also allows you to set the type of the Literal, but at this time only using XML Schema data types using
 their local names:
 
-<<>>=
+```{r}
 add.data.triple(store,
   subject="http://example.org/Subject",
   predicate="http://example.org/Predicate",
   data="Value",
   type="string"
 )
-@
+```
 
-\subsection{Serialization to and from strings}
-\label{sec:string}
+## Serialization to and from strings
 
 It can be useful to serialize the storage to a string for introspection:
 
-<<>>=
+```{r}
 store = new.rdf(ontology=FALSE)
 add.prefix(store, "idorg", "http://identifiers.org/pubmed/")
 add.prefix(store, "bibo", "http://purl.org/ontology/bibo/")
@@ -133,11 +140,11 @@ add.data.triple(store,
   "23657106"
 )
 cat(asString.rdf(store, format="N3"))
-@
+```
 
 And, one can also populate a storage from a string:
 
-<<>>=
+```{r}
 store = fromString.rdf(paste(
   "<http://example.org/Subject>",
   "<http://example.org/Predicate>",
@@ -145,51 +152,50 @@ store = fromString.rdf(paste(
   "."
 ), format="N-TRIPLES");
 summarize.rdf(store)
-@
+```
 
-\subsection{Serialization to files}
+## Serialization to files
 
 A store is nice, but to interoperate with other tools, we commonly have serialize the data. For this, we can use
 the \textit{save.rdf} method (the filename is POSIX-based):
 
-<<>>=
+```{r}
 tmpfile = tempfile(fileext=".rdfxml")
 save.rdf(store, tmpfile)
-@
+```
 
 This example shows that the methods takes the RDF/XML format as default. That is, the verbose RDF/XML. But you
 can also save as abbreviated RDF/XML and as Notation3:
 
-<<>>=
+```{r}
 save.rdf(store, tempfile(fileext=".ardfxml"), format="RDF/XML-ABBREV")
 save.rdf(store, tempfile(fileext=".n3"), format="N3")
-@
+```
 
 To customize the output, we can define prefixes:
 
-<<>>=
+```{r}
 add.prefix(store, "ex", "http://example.org/")
 add.prefix(store, "xsd", "http://www.w3.org/2001/XMLSchema#")
 save.rdf(store, tempfile(fileext=".n3"), format="N3")
-@
+```
 
 The output will then resemble:
 
-\begin{verbatim}
+```
 @prefix ex:      <http://example.org/> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 ex:Subject
       ex:Predicate "Value" , "Value"^^xsd:string , ex:Object .
-\end{verbatim}
+```
 
-\subsection{Loading triple files}
-\label{sec:loading}
+## Loading triple files
 
 Minting triples one by one can be fun for a while, but soon you will want to just load a set of triples from
-a data file. This is done with the \textit{load.rdf} method. Let's read this file:
+a data file. This is done with the *load.rdf* method. Let's read this file:
 
-\begin{verbatim}
+```turtle
 @prefix rdfs:    <http://www.w3.org/rdf/schema/#> .
 @prefix ex:      <http://example.org/> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
@@ -210,14 +216,14 @@ ex:Butane
   rdfs:label "butane"^^xsd:string ;
   ex:formula "C4H10"^^xsd:string ;
   ex:carbonCount "4"^^xsd:integer .
-\end{verbatim}
+```
 
 This file contains information about a series chemical compounds, called alkanes. For that, we use this code:
 
-<<>>=
+```{r}
 exData = load.rdf("ex.n3", format="N3")
 summarize.rdf(exData)
-@
+```
 
 Note that we have the additional 40 triples from the ontology model. It therefore read 12 triples from the file.
 
@@ -230,10 +236,10 @@ To query RDF stores, the SPARQL query language was developed. The rrdf package a
 remote stores. This tutorial will not introduce the SPARQL language itself, for which there are plenty of resources
 available on the web.
 
-We demonstrate the SPARQL functionality with the alkane data loaded in Section~\ref{sec:loading}. For example,
+We demonstrate the SPARQL functionality with the alkane data loaded in Section [sec:loading]. For example,
 when we want to find all alkanes with more then 2 carbons we can do:
 
-<<>>=
+```{r}
 sparql.rdf(exData,
   paste(
     "SELECT ?name ?carbons WHERE {",
@@ -242,12 +248,12 @@ sparql.rdf(exData,
     "}"
   )
 ) 
-@
+```
 
 The results will be stored in a matrix, and the variable names in the query will be used as column names.
 We can even say which column should be used as row names:
 
-<<>>=
+```{r}
 sparql.rdf(exData,
   paste(
     "SELECT ?name ?carbons WHERE {",
@@ -257,16 +263,16 @@ sparql.rdf(exData,
   ),
   rowvarname="name"
 ) 
-@
+```
 
 The latter has the added value that now the matrix is numeric.
 
-\subsection{Remote SPARQL}
+## Remote SPARQL
 
 Similarly, we can do remote queries. We just replace the local store with a string representation of the SPARQL
 end point URI, and slightly change the method name:
 
-\begin{verbatim}
+```{r, eval=FALSE}
 sparql.remote(
   "http://rdf.farmbio.uu.se/chembl/sparql",
   paste(
@@ -275,11 +281,10 @@ sparql.remote(
     "}"
   )
 ) 
-\end{verbatim}
+```
 
+# License
 
-\bibliographystyle{abbrv}
-\bibliography{tutorial}
+This tutorial is licensed Creative Commons BY-SA.
 
-
-\end{document}
+# References

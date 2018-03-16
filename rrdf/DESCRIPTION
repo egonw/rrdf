@@ -1,8 +1,8 @@
 Package: rrdf
 Type: Package
 Title: rrdf - support for the Resource Description Framework
-Version: 2.1.3
-Date: 2017-10-15
+Version: 2.2.0
+Date: 2018-03-15
 Authors@R: c(person("Egon", "Willighagen", role = c("aut", "cre"),
   email = "egon.willighagen@gmail.com", comment = c(ORCID = "0000-0001-7542-0286")),
   person("Carl", "Boettiger", role = "ctb"),
@@ -15,8 +15,9 @@ Author: Egon Willighagen [aut, cre],
   Richard Zijdeman [ctb],
   Davide Ceolin [ctb]
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
-Depends: R (>= 2.0.0), rJava, rrdflibs (>= 1.4.0)
-Suggests: testthat
+Depends: R (>= 3.4.0), rJava, rrdflibs (>= 1.4.0)
+VignetteBuilder: knitr
+Suggests: BiocStyle, knitr, rmarkdown, testthat
 Description: Work with RDF data using the Jena (http://jena.apache.org) libraries.
   It allows SPARQLing local and remote end point, in-memory triple stores, creating
   new triples, and file IO in various formats.
