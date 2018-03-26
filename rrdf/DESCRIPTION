@@ -15,7 +15,7 @@ Author: Egon Willighagen [aut, cre],
   Richard Zijdeman [ctb],
   Davide Ceolin [ctb]
 Maintainer: Egon Willighagen <egon.willighagen@gmail.com>
-Depends: R (>= 3.4.0), rJava, rrdflibs (>= 1.4.0)
+Depends: R (>= 3.3.0), rJava, rrdflibs (>= 1.4.0)
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown, testthat
 Description: Work with RDF data using the Jena (http://jena.apache.org) libraries.
