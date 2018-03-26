@@ -4,7 +4,7 @@ author: "Egon Willighagen"
 date: "`r Sys.Date()`"
 package: rrdf
 output: 
-  rmarkdown::html_document:
+  BiocStyle::html_document:
     toc_float: true
 vignette: >
   %\VignetteIndexEntry{A short tutorial on rrdf}
@@ -20,6 +20,10 @@ references:
   - family: noname
     given: noname
 ---
+
+```{r  init, message = FALSE, echo = FALSE, results = "hide" }
+library(BiocStyle)
+```
 
 # Introduction
 
